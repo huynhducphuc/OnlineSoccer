@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.noname.onlinesoccer.bean.District;
-import com.example.noname.onlinesoccer.dbhelper.DatabaseHelper;
-import com.example.noname.onlinesoccer.dbhelper.DistrictTable;
+import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
+import com.example.ooosu.quanlysanbong.dbhelper.DistrictTable;
+import com.example.ooosu.quanlysanbong.model.bean.District;
 
 import java.util.ArrayList;
 import java.util.List;

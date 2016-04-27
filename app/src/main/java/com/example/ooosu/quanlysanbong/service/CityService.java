@@ -4,11 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.example.noname.onlinesoccer.bean.City;
-import com.example.noname.onlinesoccer.dbhelper.CityTable;
-import com.example.noname.onlinesoccer.dbhelper.DatabaseHelper;
+
+import com.example.ooosu.quanlysanbong.dbhelper.CityTable;
+import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
+import com.example.ooosu.quanlysanbong.model.bean.City;
 
 import java.util.ArrayList;
 import java.util.List;
