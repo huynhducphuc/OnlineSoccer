@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_matcheslist_layout"
+            android:icon="@drawable/matcheslist"
+            android:title="Matches list" />
+        <item
+            android:id="@+id/nav_yourmatches_layout"
+            android:icon="@drawable/yourmatches"
+            android:title="Your matches" />
+        <item
+            android:id="@+id/nav_creatematch_layout"
+            android:icon="@drawable/create"
+            android:title="Setup a match" />
+        <item
+            android:id="@+id/nav_viewprofile_layout"
+            android:icon="@drawable/profile"
+            android:title="Profile infomation" />
+        <item
+            android:id="@+id/nav_changepassword_layout"
+            android:icon="@drawable/changepassword"
+            android:title="Change password" />
+
+    </group>
+
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/nav_logout_layout"
+                android:icon="@drawable/nav_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>
