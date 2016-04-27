@@ -31,7 +31,7 @@ public class MatchesListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.matches_list_layout, container, false);
         //lay du lieu
-        MatchService matchService = new MatchService(getContext());
+        MatchService matchService = new MatchService(getActivity().getApplicationContext());
         List<Match> matchList = matchService.getAllMatches();
 //        matchList.add(new Match(1,100000,new Timestamp((long)date.getTime()),1,12));
 //        matchList.add(new Match(2,100000,new Timestamp((long)date.getTime()),1,12));

@@ -44,6 +44,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_USER);
         db.execSQL(SQL_CREATE_MATCH);
         db.execSQL(SQL_CREATE_SLOT);
+
+        // insert data
+        // city
+        db.execSQL("insert into cities(city_name) values('Đà Nẵng');");
+        db.execSQL("insert into cities(city_name) values('Hà Nội');");
+        db.execSQL("insert into cities(city_name) values('Quảng Nam');");
+        db.execSQL("insert into cities(city_name) values('Bình Định');");
+
+        // district
+        db.execSQL("insert into districts(district_name, city_id) values('Liên Chiểu' ,1);");
+        db.execSQL("insert into districts(district_name, city_id) values('Cẩm Lệ' ,1);");
+        db.execSQL("insert into districts(district_name, city_id) values('Thanh Khê' ,1);");
+        db.execSQL("insert into districts(district_name, city_id) values('Ngũ Hành Sơn' ,1);");
+        db.execSQL("insert into districts(district_name, city_id) values('Sơn Trà' ,1);");
+        db.execSQL("insert into districts(district_name, city_id) values('Hòa Vang' ,1);");
+        db.execSQL("insert into districts(district_name, city_id) values('Hải Châu' ,1);");
+
+        // field
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Nguyễn Chánh', 1, 'Hoà Khánh Bắc Liên Chiểu Đà Nẵng', 16.084969, 16.084969, '098 1198132', date('now'), null, null);");
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng Chuyên Việt', 7, '98 Tiểu La, Quận Hải Châu', 16.050577, 108.209351, '05113638555', date('now'), null, null);");
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng MU', 1, '59 Ngô Thì Nhậm, Hòa Khánh Nam, Liên Chiểu', 16.071593, 108.155218, '05113388987', date('now'), null, null);");
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng Tân Hưng yên', 1, '878 Tôn Đức Thắng – Liên Chiểu', 16.069858, 108.151479, '05113388987', date('now'), null, null);");
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Cụm sân bóng đá Làng thể thao Tuyên Sơn', 7, 'Số 22 đường 2/9 – Quận Hải Châu ', 16.032229, 108.223181, '(0511) 3630.666', date('now'), null, null);");
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng Duy Tân (Quân Khu 5)', 7, 'số 07 đường Duy Tân, Quận Hải Châu, Tp.Đà Nẵng', 16.048863, 108.212171, '(0511) 6555 197', date('now'), null, null);");
+
+        // user
+        db.execSQL("insert into users(username, password, email, phone_number, status, district_id, user_type, last_login, is_verified, verification_code, created, updated, deleted) values('onlinesoccer', '123456', 'abc@onlinesoccer@gmail.com', '016434467809', 1, 1, 1, date('now'), 1, null, date('now'), null, null);");
+        db.execSQL("insert into users(username, password, email, phone_number, status, district_id, user_type, last_login, is_verified, verification_code, created, updated, deleted) values('onlinesoccer1', '123456', 'abc@onlinesoccer@gmail.com', '016434467809', 1, 1, 1, date('now'), 1, null, date('now'), null, null);");
+
     }
 
     @Override

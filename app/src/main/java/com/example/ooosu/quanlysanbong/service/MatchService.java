@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.dbhelper.MatchTable;
 import com.example.ooosu.quanlysanbong.model.bean.Match;
+import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -55,13 +56,13 @@ public class MatchService {
                         cursor.getInt(3),
                         cursor.getInt(4),
                         cursor.getInt(5),
-                        Timestamp.valueOf(cursor.getString(6)),
-                        Timestamp.valueOf(cursor.getString(7)),
+                        DateUtils.convertToTimestamp(cursor.getString(6)),
+                        DateUtils.convertToTimestamp(cursor.getString(7)),
                         cursor.getInt(8) > 0,
                         cursor.getString(9),
-                        Timestamp.valueOf(cursor.getString(10)),
-                        Timestamp.valueOf(cursor.getString(11)),
-                        Timestamp.valueOf(cursor.getString(12)));
+                        DateUtils.convertToTimestamp(cursor.getString(10)),
+                        DateUtils.convertToTimestamp(cursor.getString(11)),
+                        DateUtils.convertToTimestamp(cursor.getString(12)));
             }
             return match;
         }
@@ -96,13 +97,14 @@ public class MatchService {
                         cursor.getInt(3),
                         cursor.getInt(4),
                         cursor.getInt(5),
-                        Timestamp.valueOf(cursor.getString(6)),
-                        Timestamp.valueOf(cursor.getString(7)),
+                        DateUtils.convertToTimestamp(cursor.getString(6)),
+                        DateUtils.convertToTimestamp(cursor.getString(7)),
                         cursor.getInt(8) > 0,
                         cursor.getString(9),
-                        Timestamp.valueOf(cursor.getString(10)),
-                        Timestamp.valueOf(cursor.getString(11)),
-                        Timestamp.valueOf(cursor.getString(12)));
+                        DateUtils.convertToTimestamp(cursor.getString(10)),
+                        DateUtils.convertToTimestamp(cursor.getString(11)),
+                        DateUtils.convertToTimestamp(cursor.getString(12)));
+
                 results.add(match);
 
             } while (cursor.moveToNext());
@@ -119,13 +121,13 @@ public class MatchService {
         cv.put(MatchTable.STATUS.getValue(), match.getStatus());
         cv.put(MatchTable.MAX_PLAYERS.getValue(), match.getMaxPlayers());
         cv.put(MatchTable.PRICE.getValue(), match.getPrice());
-        cv.put(MatchTable.START_TIME.getValue(), match.getStartTime().toString());
-        cv.put(MatchTable.END_TIME.getValue(), match.getEndTime().toString());
+        cv.put(MatchTable.START_TIME.getValue(), DateUtils.formatDatetime(match.getStartTime()));
+        cv.put(MatchTable.END_TIME.getValue(), DateUtils.formatDatetime(match.getEndTime()));
         cv.put(MatchTable.VERIFIED.getValue(), match.isVerified());
         cv.put(MatchTable.VERIFICATION_CODE.getValue(), match.getVerificationCode());
-        cv.put(MatchTable.CREATED.getValue(), match.getCreatedDate().toString());
-        cv.put(MatchTable.UPDATED.getValue(), match.getUpdatedDate().toString());
-        cv.put(MatchTable.DELETED.getValue(), match.getDeletedDate().toString());
+        cv.put(MatchTable.CREATED.getValue(), DateUtils.formatDatetime(match.getCreatedDate()));
+        cv.put(MatchTable.UPDATED.getValue(), DateUtils.formatDatetime(match.getUpdatedDate()));
+        cv.put(MatchTable.DELETED.getValue(), DateUtils.formatDatetime(match.getDeletedDate()));
 
         return db.insert(MatchTable.TABLE_NAME.getValue(), null, cv);
     }
@@ -141,13 +143,13 @@ public class MatchService {
             cv.put(MatchTable.STATUS.getValue(), match.getStatus());
             cv.put(MatchTable.MAX_PLAYERS.getValue(), match.getMaxPlayers());
             cv.put(MatchTable.PRICE.getValue(), match.getPrice());
-            cv.put(MatchTable.START_TIME.getValue(), match.getStartTime().toString());
-            cv.put(MatchTable.END_TIME.getValue(), match.getEndTime().toString());
+            cv.put(MatchTable.START_TIME.getValue(), DateUtils.formatDatetime(match.getStartTime()));
+            cv.put(MatchTable.END_TIME.getValue(), DateUtils.formatDatetime(match.getEndTime()));
             cv.put(MatchTable.VERIFIED.getValue(), match.isVerified());
             cv.put(MatchTable.VERIFICATION_CODE.getValue(), match.getVerificationCode());
-            cv.put(MatchTable.CREATED.getValue(), match.getCreatedDate().toString());
-            cv.put(MatchTable.UPDATED.getValue(), match.getUpdatedDate().toString());
-            cv.put(MatchTable.DELETED.getValue(), match.getDeletedDate().toString());
+            cv.put(MatchTable.CREATED.getValue(), DateUtils.formatDatetime(match.getCreatedDate()));
+            cv.put(MatchTable.UPDATED.getValue(), DateUtils.formatDatetime(match.getUpdatedDate()));
+            cv.put(MatchTable.DELETED.getValue(), DateUtils.formatDatetime(match.getDeletedDate()));
 
             return db.update(MatchTable.TABLE_NAME.getValue(), cv, MatchTable.MATCH_ID.getValue() + "=?", new String[] {String.valueOf(match.getId())});
         }

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.dbhelper.FieldTable;
 import com.example.ooosu.quanlysanbong.model.bean.Field;
+import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -44,7 +45,16 @@ public class FieldService {
                 null, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
-            field = new Field(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6), Timestamp.valueOf(cursor.getString(7)), Timestamp.valueOf(cursor.getString(8)), Timestamp.valueOf(cursor.getString(9)));
+            field = new Field(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getFloat(4),
+                    cursor.getFloat(5),
+                    cursor.getString(6),
+                    DateUtils.convertToTimestamp(cursor.getString(7)),
+                    DateUtils.convertToTimestamp(cursor.getString(8)),
+                    DateUtils.convertToTimestamp(cursor.getString(9)));
         }
         return field;
     }
@@ -58,7 +68,17 @@ public class FieldService {
         Cursor cursor = db.rawQuery(query, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                field = new Field(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6), Timestamp.valueOf(cursor.getString(7)), Timestamp.valueOf(cursor.getString(8)), Timestamp.valueOf(cursor.getString(9)));
+                field = new Field(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getString(3),
+                        cursor.getFloat(4),
+                        cursor.getFloat(5),
+                        cursor.getString(6),
+                        DateUtils.convertToTimestamp(cursor.getString(7)),
+                        DateUtils.convertToTimestamp(cursor.getString(8)),
+                        DateUtils.convertToTimestamp(cursor.getString(9)));
+
                 results.add(field);
             } while (cursor.moveToNext());
         }
@@ -78,6 +98,7 @@ public class FieldService {
             cv.put(FieldTable.LATITUDE.getValue(), field.getLatitude());
             cv.put(FieldTable.LONGITUDE.getValue(), field.getLongitude());
             cv.put(FieldTable.PHONE_NUMBER.getValue(), field.getPhoneNumber());
+            cv.put(FieldTable.CREATED.getValue(), DateUtils.formatDatetime(field.getCreatedDate()));
 
             return db.insert(FieldTable.TABLE_NAME.getValue(), null, cv);
         }
@@ -95,6 +116,7 @@ public class FieldService {
             cv.put(FieldTable.LATITUDE.getValue(), field.getLatitude());
             cv.put(FieldTable.LONGITUDE.getValue(), field.getLongitude());
             cv.put(FieldTable.PHONE_NUMBER.getValue(), field.getPhoneNumber());
+            cv.put(FieldTable.UPDATED.getValue(), DateUtils.formatDatetime(field.getUpdatedDate()));
 
             return db.update(FieldTable.TABLE_NAME.getValue(), cv, FieldTable.FIELD_ID + "=?", new String[]{String.valueOf(field.getId())});
         }

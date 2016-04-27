@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.dbhelper.SlotTable;
 import com.example.ooosu.quanlysanbong.model.bean.Slot;
+import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -48,9 +49,9 @@ public class SlotService {
                         cursor.getInt(2),
                         cursor.getInt(3) > 0,
                         cursor.getString(4),
-                        Timestamp.valueOf(cursor.getString(5)),
-                        Timestamp.valueOf(cursor.getString(6)),
-                        Timestamp.valueOf(cursor.getString(7)));
+                        DateUtils.convertToTimestamp(cursor.getString(5)),
+                        DateUtils.convertToTimestamp(cursor.getString(6)),
+                        DateUtils.convertToTimestamp(cursor.getString(7)));
             }
             return slot;
         }
@@ -77,9 +78,9 @@ public class SlotService {
                         cursor.getInt(2),
                         cursor.getInt(3) > 0,
                         cursor.getString(4),
-                        Timestamp.valueOf(cursor.getString(5)),
-                        Timestamp.valueOf(cursor.getString(6)),
-                        Timestamp.valueOf(cursor.getString(7)));
+                        DateUtils.convertToTimestamp(cursor.getString(5)),
+                        DateUtils.convertToTimestamp(cursor.getString(6)),
+                        DateUtils.convertToTimestamp(cursor.getString(7)));
 
                 results.add(slot);
 
@@ -96,9 +97,7 @@ public class SlotService {
         cv.put(SlotTable.QUANTITY.getValue(), slot.getQuantity());
         cv.put(SlotTable.VERIFIED.getValue(), slot.isVerified());
         cv.put(SlotTable.VERIFICATION_CODE.getValue(), slot.getVerificationCode());
-        cv.put(SlotTable.CREATED.getValue(), slot.getCreatedDate().toString());
-        cv.put(SlotTable.UPDATED.getValue(), slot.getUpdatedDate().toString());
-        cv.put(SlotTable.DELETED.getValue(), slot.getDeletedDate().toString());
+        cv.put(SlotTable.CREATED.getValue(), DateUtils.formatDatetime(slot.getCreatedDate()));
 
         return db.insert(SlotTable.TABLE_NAME.getValue(), null, cv);
     }
@@ -113,10 +112,7 @@ public class SlotService {
             cv.put(SlotTable.USER_ID.getValue(), slot.getUserId());
             cv.put(SlotTable.QUANTITY.getValue(), slot.getQuantity());
             cv.put(SlotTable.VERIFIED.getValue(), slot.isVerified());
-            cv.put(SlotTable.VERIFICATION_CODE.getValue(), slot.getVerificationCode());
-            cv.put(SlotTable.CREATED.getValue(), slot.getCreatedDate().toString());
-            cv.put(SlotTable.UPDATED.getValue(), slot.getUpdatedDate().toString());
-            cv.put(SlotTable.DELETED.getValue(), slot.getDeletedDate().toString());
+            cv.put(SlotTable.UPDATED.getValue(), DateUtils.formatDatetime(slot.getUpdatedDate()));
 
             return db.update(SlotTable.TABLE_NAME.getValue(),
                     cv,

@@ -100,7 +100,7 @@ public class UserService {
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),
-                        Timestamp.valueOf(cursor.getString(8)),
+                        DateUtils.convertToTimestamp(cursor.getString(8)),
                         cursor.getInt(9) > 0,
                         cursor.getString(10),
                         DateUtils.convertToTimestamp(cursor.getString(11)),
