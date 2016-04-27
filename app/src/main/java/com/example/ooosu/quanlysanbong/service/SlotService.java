@@ -49,9 +49,9 @@ public class SlotService {
                         cursor.getInt(2),
                         cursor.getInt(3) > 0,
                         cursor.getString(4),
-                        DateUtils.convertToTimestamp(cursor.getString(5)),
-                        DateUtils.convertToTimestamp(cursor.getString(6)),
-                        DateUtils.convertToTimestamp(cursor.getString(7)));
+                        DateUtils.convertToTimestamp(cursor.getString(5), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(6), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE));
             }
             return slot;
         }
@@ -78,9 +78,9 @@ public class SlotService {
                         cursor.getInt(2),
                         cursor.getInt(3) > 0,
                         cursor.getString(4),
-                        DateUtils.convertToTimestamp(cursor.getString(5)),
-                        DateUtils.convertToTimestamp(cursor.getString(6)),
-                        DateUtils.convertToTimestamp(cursor.getString(7)));
+                        DateUtils.convertToTimestamp(cursor.getString(5), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(6), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE));
 
                 results.add(slot);
 
@@ -97,7 +97,7 @@ public class SlotService {
         cv.put(SlotTable.QUANTITY.getValue(), slot.getQuantity());
         cv.put(SlotTable.VERIFIED.getValue(), slot.isVerified());
         cv.put(SlotTable.VERIFICATION_CODE.getValue(), slot.getVerificationCode());
-        cv.put(SlotTable.CREATED.getValue(), DateUtils.formatDatetime(slot.getCreatedDate()));
+        cv.put(SlotTable.CREATED.getValue(), DateUtils.formatDatetime(slot.getCreatedDate(), DateUtils.FOR_DATABASE));
 
         return db.insert(SlotTable.TABLE_NAME.getValue(), null, cv);
     }
@@ -112,7 +112,7 @@ public class SlotService {
             cv.put(SlotTable.USER_ID.getValue(), slot.getUserId());
             cv.put(SlotTable.QUANTITY.getValue(), slot.getQuantity());
             cv.put(SlotTable.VERIFIED.getValue(), slot.isVerified());
-            cv.put(SlotTable.UPDATED.getValue(), DateUtils.formatDatetime(slot.getUpdatedDate()));
+            cv.put(SlotTable.UPDATED.getValue(), DateUtils.formatDatetime(slot.getUpdatedDate(), DateUtils.FOR_DATABASE));
 
             return db.update(SlotTable.TABLE_NAME.getValue(),
                     cv,

@@ -58,12 +58,12 @@ public class UserService {
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),
-                        DateUtils.convertToTimestamp(cursor.getString(8)),
+                        DateUtils.convertToTimestamp(cursor.getString(8), DateUtils.FOR_DATABASE),
                         cursor.getInt(9) > 0,
                         cursor.getString(10),
-                        DateUtils.convertToTimestamp(cursor.getString(11)),
-                        DateUtils.convertToTimestamp(cursor.getString(12)),
-                        DateUtils.convertToTimestamp(cursor.getString(13)));
+                        DateUtils.convertToTimestamp(cursor.getString(11), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(12), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(13), DateUtils.FOR_DATABASE));
             }
             return user;
         }
@@ -100,12 +100,12 @@ public class UserService {
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),
-                        DateUtils.convertToTimestamp(cursor.getString(8)),
+                        DateUtils.convertToTimestamp(cursor.getString(8), DateUtils.FOR_DATABASE),
                         cursor.getInt(9) > 0,
                         cursor.getString(10),
-                        DateUtils.convertToTimestamp(cursor.getString(11)),
-                        DateUtils.convertToTimestamp(cursor.getString(12)),
-                        DateUtils.convertToTimestamp(cursor.getString(13)));
+                        DateUtils.convertToTimestamp(cursor.getString(11), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(12), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(13), DateUtils.FOR_DATABASE));
 
                 results.add(user);
 
@@ -128,9 +128,9 @@ public class UserService {
         cv.put(UserTable.LAST_LOGIN.getValue(), user.getLastLogin().toString());
         cv.put(UserTable.VERIFIED.getValue(), user.isVerified());
         cv.put(UserTable.VERIFICATION_CODE.getValue(), user.getVerificationCode());
-        cv.put(UserTable.CREATED.getValue(), DateUtils.formatDatetime(user.getCreatedDate()));
-        cv.put(UserTable.UPDATED.getValue(), DateUtils.formatDatetime(user.getUpdatedDate()));
-        cv.put(UserTable.DELETED.getValue(), DateUtils.formatDatetime(user.getDeletedDate()));
+        cv.put(UserTable.CREATED.getValue(), DateUtils.formatDatetime(user.getCreatedDate(), DateUtils.FOR_DATABASE));
+        cv.put(UserTable.UPDATED.getValue(), DateUtils.formatDatetime(user.getUpdatedDate(), DateUtils.FOR_DATABASE));
+        cv.put(UserTable.DELETED.getValue(), DateUtils.formatDatetime(user.getDeletedDate(), DateUtils.FOR_DATABASE));
 
         return db.insert(UserTable.TABLE_NAME.getValue(), null, cv);
     }
@@ -201,12 +201,12 @@ public class UserService {
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),
-                        DateUtils.convertToTimestamp(cursor.getString(8)),
+                        DateUtils.convertToTimestamp(cursor.getString(8), DateUtils.FOR_DATABASE),
                         cursor.getInt(9) > 0,
                         cursor.getString(10),
-                        DateUtils.convertToTimestamp(cursor.getString(11)),
-                        DateUtils.convertToTimestamp(cursor.getString(12)),
-                        DateUtils.convertToTimestamp(cursor.getString(13)));
+                        DateUtils.convertToTimestamp(cursor.getString(11), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(12), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(13), DateUtils.FOR_DATABASE));
             }
             return user;
         }

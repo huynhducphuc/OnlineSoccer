@@ -10,7 +10,6 @@ import com.example.ooosu.quanlysanbong.dbhelper.FieldTable;
 import com.example.ooosu.quanlysanbong.model.bean.Field;
 import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,9 +51,9 @@ public class FieldService {
                     cursor.getFloat(4),
                     cursor.getFloat(5),
                     cursor.getString(6),
-                    DateUtils.convertToTimestamp(cursor.getString(7)),
-                    DateUtils.convertToTimestamp(cursor.getString(8)),
-                    DateUtils.convertToTimestamp(cursor.getString(9)));
+                    DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE),
+                    DateUtils.convertToTimestamp(cursor.getString(8), DateUtils.FOR_DATABASE),
+                    DateUtils.convertToTimestamp(cursor.getString(9), DateUtils.FOR_DATABASE));
         }
         return field;
     }
@@ -75,9 +74,9 @@ public class FieldService {
                         cursor.getFloat(4),
                         cursor.getFloat(5),
                         cursor.getString(6),
-                        DateUtils.convertToTimestamp(cursor.getString(7)),
-                        DateUtils.convertToTimestamp(cursor.getString(8)),
-                        DateUtils.convertToTimestamp(cursor.getString(9)));
+                        DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(8), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(9), DateUtils.FOR_DATABASE));
 
                 results.add(field);
             } while (cursor.moveToNext());
@@ -98,7 +97,7 @@ public class FieldService {
             cv.put(FieldTable.LATITUDE.getValue(), field.getLatitude());
             cv.put(FieldTable.LONGITUDE.getValue(), field.getLongitude());
             cv.put(FieldTable.PHONE_NUMBER.getValue(), field.getPhoneNumber());
-            cv.put(FieldTable.CREATED.getValue(), DateUtils.formatDatetime(field.getCreatedDate()));
+            cv.put(FieldTable.CREATED.getValue(), DateUtils.formatDatetime(field.getCreatedDate(), DateUtils.FOR_DATABASE));
 
             return db.insert(FieldTable.TABLE_NAME.getValue(), null, cv);
         }
@@ -116,7 +115,7 @@ public class FieldService {
             cv.put(FieldTable.LATITUDE.getValue(), field.getLatitude());
             cv.put(FieldTable.LONGITUDE.getValue(), field.getLongitude());
             cv.put(FieldTable.PHONE_NUMBER.getValue(), field.getPhoneNumber());
-            cv.put(FieldTable.UPDATED.getValue(), DateUtils.formatDatetime(field.getUpdatedDate()));
+            cv.put(FieldTable.UPDATED.getValue(), DateUtils.formatDatetime(field.getUpdatedDate(), DateUtils.FOR_DATABASE));
 
             return db.update(FieldTable.TABLE_NAME.getValue(), cv, FieldTable.FIELD_ID + "=?", new String[]{String.valueOf(field.getId())});
         }

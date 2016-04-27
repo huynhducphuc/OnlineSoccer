@@ -7,6 +7,10 @@ import java.util.Date;
 
 public class DateUtils {
 
+	public static final String FOR_DATABASE = "yyyy-MM-dd HH:mm:ss";
+	public static final String FOR_SCREEN = "dd/MM/yyyy HH:mm:ss";
+
+
 	/**
 	 * <h1>convertToUDate</h1> Chuyen ngay kieu java.util.Date thanh
 	 * java.sql.Date
@@ -156,11 +160,11 @@ public class DateUtils {
 	 *            String
 	 * @return java.sql.Timestamp hoac null
 	 */
-	public static Timestamp convertToTimestamp(String timeStampInString) {
+	public static Timestamp convertToTimestamp(String timeStampInString, String pattern) {
 		if (timeStampInString == null) {
 			return null;
 		} else {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
 			Date uDate = null;
 			Timestamp timeStamp = null;
 			try {
@@ -214,12 +218,12 @@ public class DateUtils {
 	 * @param uDate
 	 * @return Chuoi ngay gio theo dinh dang "dd/MM/yyyy HH:mm:ss" hoac null
 	 */
-	public static String formatDatetime(Date uDate) {
+	public static String formatDatetime(Date uDate, String pattern) {
 		if (uDate == null) {
 			return null;
 		} else {
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
-					"dd/MM/yyyy HH:mm:ss");
+					pattern);
 			return dateFormat.format(uDate);
 		}
 	}
@@ -231,12 +235,12 @@ public class DateUtils {
 	 * @param timeStamp
 	 * @return Chuoi ngay gio theo dinh dang "dd/MM/yyyy HH:mm:ss" hoac null
 	 */
-	public static String formatDatetime(Timestamp timeStamp) {
+	public static String formatDatetime(Timestamp timeStamp, String pattern) {
 		if (timeStamp == null) {
 			return null;
 		} else {
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
-					"dd/MM/yyyy HH:mm:ss");
+					pattern);
 			return dateFormat.format(timeStamp);
 		}
 	}
