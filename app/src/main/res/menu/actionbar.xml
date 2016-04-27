@@ -7,14 +7,6 @@
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"  />
-    <item
-        android:id="@+id/action_save"
-        android:title="Save"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_cancel"
-        android:title="Cancel"
-        app:showAsAction="ifRoom" />
     <item android:id="@+id/exit"
         android:title="Exit"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"

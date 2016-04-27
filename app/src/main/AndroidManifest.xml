@@ -24,7 +24,7 @@
 
         <activity android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,10 +32,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MatchDetailActivity"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity"
+            android:noHistory="true"/>
         <activity android:name=".activities.GoogleMapActivity" />
         <activity android:name=".activities.ForgotPasswordActivity"
-            android:parentActivityName=".activities.LoginActivity"/>
+            android:parentActivityName=".activities.LoginActivity"
+            android:noHistory="true"/>
         <activity android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />

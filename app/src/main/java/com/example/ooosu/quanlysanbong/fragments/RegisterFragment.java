@@ -54,7 +54,7 @@ public class RegisterFragment extends Fragment {
         spinnerAddress = (Spinner) view.findViewById(R.id.spinnerAddress);
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
 
-        DistrictService districtService = new DistrictService(getContext());
+        DistrictService districtService = new DistrictService(getActivity().getApplicationContext());
 //        CityService cityService = new CityService(getContext());
 //        cityService.addCity(new City("Da Nang"));
 //        cityService.addCity(new City("Quang Nam"));
@@ -74,7 +74,7 @@ public class RegisterFragment extends Fragment {
                 list.add(district.getName());
             }
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item,list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAddress.setAdapter(dataAdapter);
 
@@ -104,10 +104,10 @@ public class RegisterFragment extends Fragment {
                     int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
                     User user = new User(txtUsername.getText().toString(), txtPassword.getText().toString(),
                             txtEmail.getText().toString(), txtPhonenumber.getText().toString(), 1, idDistrict, 1,current,false,String.valueOf(verificationCode),current,null,null);
-                    new UserService(getContext()).addUser(user);
+                    new UserService(getActivity().getApplicationContext()).addUser(user);
 
                     ((LoginActivity) getActivity()).changeViewPagePosition(0);
-                    Toast.makeText(getContext(),"Đăng ký thành công",Toast.LENGTH_LONG);
+                    Toast.makeText(getActivity().getApplicationContext(),"Đăng ký thành công",Toast.LENGTH_LONG);
                 }
             }
         });

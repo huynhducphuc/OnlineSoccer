@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Field ID"
+        android:text="Field Name"
         />
     <Spinner
         android:layout_width="match_parent"
@@ -95,6 +95,13 @@
             android:textColor="#fff"
             android:text="Select"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:text=""
+        android:id="@+id/tvErrorDateTime"
+        android:layout_gravity="center"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,5 +110,6 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:textColor="#fff"
+        android:id="@+id/btnCreateMatch"
         android:background="#4CAF50"/>
 </LinearLayout>

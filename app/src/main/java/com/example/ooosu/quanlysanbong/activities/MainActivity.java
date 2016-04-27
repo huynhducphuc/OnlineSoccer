@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-        menu.findItem(R.id.action_save).setVisible(false);
-        menu.findItem(R.id.action_cancel).setVisible(false);
         return true;
     }
 
@@ -108,12 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
 
         switch (item.getItemId()) {
-            case R.id.action_save:
-
-                return true;
-            case R.id.action_cancel:
-
-                return true;
             case R.id.exit:
                 finish();
                 return true;
@@ -132,32 +124,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_matcheslist_layout) {
             actionBar.setTitle("Matches List");
             menu.findItem(R.id.action_search).setVisible(true);
-            menu.findItem(R.id.action_save).setVisible(false);
-            menu.findItem(R.id.action_cancel).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
         } else if (id == R.id.nav_yourmatches_layout) {
             actionBar.setTitle("Your matches");
             menu.findItem(R.id.action_search).setVisible(true);
-            menu.findItem(R.id.action_save).setVisible(false);
-            menu.findItem(R.id.action_cancel).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();
         }else if (id == R.id.nav_creatematch_layout) {
             actionBar.setTitle("Setup A Match");
             menu.findItem(R.id.action_search).setVisible(false);
-            menu.findItem(R.id.action_save).setVisible(false);
-            menu.findItem(R.id.action_cancel).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SetupAMatchFragment()).commit();
         } else if (id == R.id.nav_viewprofile_layout) {
             actionBar.setTitle("Profile Infomation");
             menu.findItem(R.id.action_search).setVisible(false);
-            menu.findItem(R.id.action_save).setVisible(false);
-            menu.findItem(R.id.action_cancel).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ProfileInformationFragment()).commit();
         }else if (id == R.id.nav_changepassword_layout) {
             actionBar.setTitle("Change Password");
             menu.findItem(R.id.action_search).setVisible(false);
-            menu.findItem(R.id.action_save).setVisible(true);
-            menu.findItem(R.id.action_cancel).setVisible(true);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ChangePasswordFragment()).commit();
         }else if (id == R.id.nav_logout_layout) {
             Intent intent = new Intent(this,LoginActivity.class);
@@ -180,14 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (chooise2 == R.id.nav_matcheslist_layout) {
                     actionBar.setTitle("Matches List");
                     menu.findItem(R.id.action_search).setVisible(true);
-                    menu.findItem(R.id.action_save).setVisible(false);
-                    menu.findItem(R.id.action_cancel).setVisible(false);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
                 }else if (chooise2 == R.id.nav_yourmatches_layout) {
                     actionBar.setTitle("Your matches");
                     menu.findItem(R.id.action_search).setVisible(true);
-                    menu.findItem(R.id.action_save).setVisible(false);
-                    menu.findItem(R.id.action_cancel).setVisible(false);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();
                 }
             }

@@ -102,13 +102,17 @@ public class LoginFragment extends Fragment {
         return valid;
     }
     public void onLoginFailed() {
-        Toast.makeText(getContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Đăng nhập thấ bại", Toast.LENGTH_LONG).show();
 
         btnLogin.setEnabled(true);
     }
     public void onLoginSuccess() {
         Toast.makeText(getContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+        Bundle bundle = new Bundle();
+        int user_id = 1;
+        bundle.putInt("user_id",user_id);
         Intent intent = new Intent(getContext(),MainActivity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
         getActivity().finish();
     }
