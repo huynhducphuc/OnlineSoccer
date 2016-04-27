@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.dbhelper.MatchTable;
+import com.example.ooosu.quanlysanbong.dbhelper.SlotTable;
+import com.example.ooosu.quanlysanbong.dbhelper.UserTable;
 import com.example.ooosu.quanlysanbong.model.bean.Match;
 import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
@@ -33,7 +35,7 @@ public class MatchService {
         } else {
             db = databaseHelper.getWritableDatabase();
             Cursor cursor = db.query(MatchTable.TABLE_NAME.getValue(),
-                    new String[] {MatchTable.MATCH_ID.getValue(),
+                    new String[]{MatchTable.MATCH_ID.getValue(),
                             MatchTable.FIELD_ID.getValue(),
                             MatchTable.HOST_ID.getValue(),
                             MatchTable.STATUS.getValue(),
@@ -47,7 +49,7 @@ public class MatchService {
                             MatchTable.UPDATED.getValue(),
                             MatchTable.DELETED.getValue()},
                     MatchTable.MATCH_ID + "=?",
-                    new String[] {String.valueOf(id)},
+                    new String[]{String.valueOf(id)},
                     null, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 match = new Match(cursor.getInt(0),
@@ -74,7 +76,7 @@ public class MatchService {
         Match match = null;
         db = databaseHelper.getWritableDatabase();
         Cursor cursor = db.query(MatchTable.TABLE_NAME.getValue(),
-                new String[] {MatchTable.MATCH_ID.getValue(),
+                new String[]{MatchTable.MATCH_ID.getValue(),
                         MatchTable.FIELD_ID.getValue(),
                         MatchTable.HOST_ID.getValue(),
                         MatchTable.STATUS.getValue(),
@@ -151,7 +153,7 @@ public class MatchService {
             cv.put(MatchTable.UPDATED.getValue(), DateUtils.formatDatetime(match.getUpdatedDate(), DateUtils.FOR_DATABASE));
             cv.put(MatchTable.DELETED.getValue(), DateUtils.formatDatetime(match.getDeletedDate(), DateUtils.FOR_DATABASE));
 
-            return db.update(MatchTable.TABLE_NAME.getValue(), cv, MatchTable.MATCH_ID.getValue() + "=?", new String[] {String.valueOf(match.getId())});
+            return db.update(MatchTable.TABLE_NAME.getValue(), cv, MatchTable.MATCH_ID.getValue() + "=?", new String[]{String.valueOf(match.getId())});
         }
     }
 
@@ -161,7 +163,7 @@ public class MatchService {
         } else {
             db = databaseHelper.getWritableDatabase();
 
-            return db.delete(MatchTable.TABLE_NAME.getValue(), MatchTable.MATCH_ID.getValue() + "=?", new String[] {String.valueOf(match.getId())});
+            return db.delete(MatchTable.TABLE_NAME.getValue(), MatchTable.MATCH_ID.getValue() + "=?", new String[]{String.valueOf(match.getId())});
         }
     }
 
@@ -170,7 +172,7 @@ public class MatchService {
         Match match = null;
         db = databaseHelper.getWritableDatabase();
         Cursor cursor = db.query(MatchTable.TABLE_NAME.getValue(),
-                new String[] {MatchTable.MATCH_ID.getValue(),
+                new String[]{MatchTable.MATCH_ID.getValue(),
                         MatchTable.FIELD_ID.getValue(),
                         MatchTable.HOST_ID.getValue(),
                         MatchTable.STATUS.getValue(),
@@ -215,7 +217,7 @@ public class MatchService {
         Match match = null;
         db = databaseHelper.getWritableDatabase();
         Cursor cursor = db.query(MatchTable.TABLE_NAME.getValue(),
-                new String[] {MatchTable.MATCH_ID.getValue(),
+                new String[]{MatchTable.MATCH_ID.getValue(),
                         MatchTable.FIELD_ID.getValue(),
                         MatchTable.HOST_ID.getValue(),
                         MatchTable.STATUS.getValue(),
@@ -229,8 +231,38 @@ public class MatchService {
                         MatchTable.UPDATED.getValue(),
                         MatchTable.DELETED.getValue()},
                 MatchTable.HOST_ID + "=?",
-                new String[] {String.valueOf(hostId)},
+                new String[]{String.valueOf(hostId)},
                 null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                match = new Match(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5),
+                        DateUtils.convertToTimestamp(cursor.getString(6), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE),
+                        cursor.getInt(8) > 0,
+                        cursor.getString(9),
+                        DateUtils.convertToTimestamp(cursor.getString(10), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(11), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(12), DateUtils.FOR_DATABASE));
+
+                results.add(match);
+
+            } while (cursor.moveToNext());
+        }
+
+        return results;
+    }
+
+    public List<Match> getOldMatches(int userId) {
+        List<Match> results = new ArrayList<>();
+        Match match = null;
+        db = databaseHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT m.match_id,m.field_id,m.host_id,m.status,m.maximum_players,m.price,m.start_time,m.end_time,m.is_verified,m.verification_code,m.created,m.updated,m.deleted FROM matches m join slots s on(m.match_id=s.match_id) join users u on(s.user_id=u.user_id) WHERE u.user_id=?;", new String[]{String.valueOf(userId)});
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
