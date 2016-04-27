@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.example.ooosu.quanlysanbong.activities.ForgotPasswordActivity;
 import com.example.ooosu.quanlysanbong.activities.LoginActivity;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
+import com.example.ooosu.quanlysanbong.model.bean.User;
+import com.example.ooosu.quanlysanbong.service.UserService;
 
 public class LoginFragment extends Fragment {
 
@@ -41,6 +44,9 @@ public class LoginFragment extends Fragment {
         btnLogin = (Button) view.findViewById(R.id.btnLogin);
         tvCreateAccount = (TextView) view.findViewById(R.id.tvCreateAccount);
         tvForgotPassword = (TextView) view.findViewById(R.id.tvForgotPassword);
+        for(User user :new UserService(getContext()).getAllUsers()){
+            Log.d("user: ",""+user.toString());
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

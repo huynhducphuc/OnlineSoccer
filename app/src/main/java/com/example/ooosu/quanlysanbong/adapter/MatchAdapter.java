@@ -16,7 +16,7 @@ import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.activities.MatchDetailActivity;
 import com.example.ooosu.quanlysanbong.model.bean.Match;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by oOosu on 4/26/2016.
@@ -24,13 +24,13 @@ import java.util.ArrayList;
 public class MatchAdapter extends ArrayAdapter<Match> {
     private Activity mContext = null;
     private int idLayout;
-    ArrayList<Match> matchesList = null;
+    List<Match> matchList = null;
 
-    public MatchAdapter(Activity mContext, int idLayout, ArrayList<Match> matchesList) {
-        super(mContext, idLayout, matchesList);
+    public MatchAdapter(Activity mContext, int idLayout, List<Match> matchList) {
+        super(mContext, idLayout, matchList);
         this.mContext = mContext;
         this.idLayout = idLayout;
-        this.matchesList = matchesList;
+        this.matchList = matchList;
     }
     public MatchAdapter(Context context,int resource){
         super(context,resource);
@@ -46,7 +46,6 @@ public class MatchAdapter extends ArrayAdapter<Match> {
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder viewHolder = null;
-        Log.d("list", " gia tri cua list :" + matchesList.size());
         if(view!=null){
             viewHolder = (ViewHolder) view.getTag();
         }else{
@@ -63,16 +62,16 @@ public class MatchAdapter extends ArrayAdapter<Match> {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                Match matches = matchesList.get(position);
-                bundle.putInt("match_id",matches.getId());
-                bundle.putInt("chooise",((MainActivity)mContext).chooise);
-                Intent intent = new Intent(mContext,MatchDetailActivity.class);
+                Match matches = matchList.get(position);
+                bundle.putInt("match_id", matches.getId());
+                bundle.putInt("chooise", ((MainActivity) mContext).chooise);
+                Intent intent = new Intent(mContext, MatchDetailActivity.class);
                 intent.putExtras(bundle);
-                mContext.startActivityForResult(intent,100);
+                mContext.startActivityForResult(intent, 100);
             }
         });
 
-        Match match = matchesList.get(position);
+        Match match = matchList.get(position);
         viewHolder.txtFieldName.setText("Nguyễn Chánh FC " + match.getFieldId());
         viewHolder.txtStartTime.setText("0:20-26/04/16 (Còn 2 ngày nữa)");
         viewHolder.txtPrice.setText(match.getPrice()+"");

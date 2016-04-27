@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.dbhelper.UserTable;
 import com.example.ooosu.quanlysanbong.model.bean.User;
+import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -102,9 +103,9 @@ public class UserService {
                         Timestamp.valueOf(cursor.getString(8)),
                         cursor.getInt(9) > 0,
                         cursor.getString(10),
-                        Timestamp.valueOf(cursor.getString(11)),
-                        Timestamp.valueOf(cursor.getString(12)),
-                        Timestamp.valueOf(cursor.getString(13)));
+                        DateUtils.convertToTimestamp(cursor.getString(11)),
+                        DateUtils.convertToTimestamp(cursor.getString(12)),
+                        DateUtils.convertToTimestamp(cursor.getString(13)));
 
                 results.add(user);
 
@@ -127,9 +128,9 @@ public class UserService {
         cv.put(UserTable.LAST_LOGIN.getValue(), user.getLastLogin().toString());
         cv.put(UserTable.VERIFIED.getValue(), user.isVerified());
         cv.put(UserTable.VERIFICATION_CODE.getValue(), user.getVerificationCode());
-        cv.put(UserTable.CREATED.getValue(), user.getCreatedDate().toString());
-        cv.put(UserTable.UPDATED.getValue(), user.getUpdatedDate().toString());
-        cv.put(UserTable.DELETED.getValue(), user.getDeletedDate().toString());
+        cv.put(UserTable.CREATED.getValue(), DateUtils.formatDatetime(user.getCreatedDate()));
+        cv.put(UserTable.UPDATED.getValue(), DateUtils.formatDatetime(user.getUpdatedDate()));
+        cv.put(UserTable.DELETED.getValue(), DateUtils.formatDatetime(user.getDeletedDate()));
 
         return db.insert(UserTable.TABLE_NAME.getValue(), null, cv);
     }

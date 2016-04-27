@@ -12,10 +12,12 @@ import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.adapter.MatchAdapter;
 import com.example.ooosu.quanlysanbong.model.bean.Match;
+import com.example.ooosu.quanlysanbong.service.MatchService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by user on 12/31/15.
@@ -29,8 +31,8 @@ public class MatchesListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.matches_list_layout, container, false);
         //lay du lieu
-        ArrayList<Match> matchList = new ArrayList<Match>();
-        Date date = new Date();
+        MatchService matchService = new MatchService(getContext());
+        List<Match> matchList = matchService.getAllMatches();
 //        matchList.add(new Match(1,100000,new Timestamp((long)date.getTime()),1,12));
 //        matchList.add(new Match(2,100000,new Timestamp((long)date.getTime()),1,12));
 //        matchList.add(new Match(3,100000,new Timestamp((long)date.getTime()),1,12));
