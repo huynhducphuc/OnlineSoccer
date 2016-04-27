@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.noname.onlinesoccer.bean.Match;
-import com.example.noname.onlinesoccer.dbhelper.DatabaseHelper;
-import com.example.noname.onlinesoccer.dbhelper.MatchTable;
+import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
+import com.example.ooosu.quanlysanbong.dbhelper.MatchTable;
+import com.example.ooosu.quanlysanbong.model.bean.Match;
 
 import java.sql.Time;
 import java.sql.Timestamp;

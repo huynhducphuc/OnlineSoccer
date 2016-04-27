@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.noname.onlinesoccer.bean.Field;
-import com.example.noname.onlinesoccer.dbhelper.DatabaseHelper;
-import com.example.noname.onlinesoccer.dbhelper.FieldTable;
+import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
+import com.example.ooosu.quanlysanbong.dbhelper.FieldTable;
+import com.example.ooosu.quanlysanbong.model.bean.Field;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
