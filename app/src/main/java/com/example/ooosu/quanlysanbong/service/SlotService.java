@@ -132,4 +132,23 @@ public class SlotService {
         }
     }
 
+    public long countSlots(int matchId) {
+        if (matchId <= 0) {
+            return 0;
+        } else {
+            db = databaseHelper.getWritableDatabase();
+            Cursor cursor = db.query(SlotTable.TABLE_NAME.getValue(),
+                    null,
+                    SlotTable.MATCH_ID + "=?",
+                    new String[] {String.valueOf(matchId)},
+                    null, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                return cursor.getLong(0);
+            } else {
+                return 0;
+            }
+        }
+    }
+
 }
