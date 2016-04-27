@@ -165,4 +165,95 @@ public class MatchService {
         }
     }
 
+    public List<Match> getAvailableMatches() {
+        List<Match> results = new ArrayList<>();
+        Match match = null;
+        db = databaseHelper.getWritableDatabase();
+        Cursor cursor = db.query(MatchTable.TABLE_NAME.getValue(),
+                new String[] {MatchTable.MATCH_ID.getValue(),
+                        MatchTable.FIELD_ID.getValue(),
+                        MatchTable.HOST_ID.getValue(),
+                        MatchTable.STATUS.getValue(),
+                        MatchTable.MAX_PLAYERS.getValue(),
+                        MatchTable.PRICE.getValue(),
+                        MatchTable.START_TIME.getValue(),
+                        MatchTable.END_TIME.getValue(),
+                        MatchTable.VERIFIED.getValue(),
+                        MatchTable.VERIFICATION_CODE.getValue(),
+                        MatchTable.CREATED.getValue(),
+                        MatchTable.UPDATED.getValue(),
+                        MatchTable.DELETED.getValue()},
+                MatchTable.START_TIME + ">datetime('now')",
+                null, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                match = new Match(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5),
+                        DateUtils.convertToTimestamp(cursor.getString(6), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE),
+                        cursor.getInt(8) > 0,
+                        cursor.getString(9),
+                        DateUtils.convertToTimestamp(cursor.getString(10), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(11), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(12), DateUtils.FOR_DATABASE));
+
+                results.add(match);
+
+            } while (cursor.moveToNext());
+        }
+
+        return results;
+    }
+
+    public List<Match> getAllMatches(int hostId) {
+        List<Match> results = new ArrayList<>();
+        Match match = null;
+        db = databaseHelper.getWritableDatabase();
+        Cursor cursor = db.query(MatchTable.TABLE_NAME.getValue(),
+                new String[] {MatchTable.MATCH_ID.getValue(),
+                        MatchTable.FIELD_ID.getValue(),
+                        MatchTable.HOST_ID.getValue(),
+                        MatchTable.STATUS.getValue(),
+                        MatchTable.MAX_PLAYERS.getValue(),
+                        MatchTable.PRICE.getValue(),
+                        MatchTable.START_TIME.getValue(),
+                        MatchTable.END_TIME.getValue(),
+                        MatchTable.VERIFIED.getValue(),
+                        MatchTable.VERIFICATION_CODE.getValue(),
+                        MatchTable.CREATED.getValue(),
+                        MatchTable.UPDATED.getValue(),
+                        MatchTable.DELETED.getValue()},
+                MatchTable.HOST_ID + "=?",
+                new String[] {String.valueOf(hostId)},
+                null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                match = new Match(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5),
+                        DateUtils.convertToTimestamp(cursor.getString(6), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(7), DateUtils.FOR_DATABASE),
+                        cursor.getInt(8) > 0,
+                        cursor.getString(9),
+                        DateUtils.convertToTimestamp(cursor.getString(10), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(11), DateUtils.FOR_DATABASE),
+                        DateUtils.convertToTimestamp(cursor.getString(12), DateUtils.FOR_DATABASE));
+
+                results.add(match);
+
+            } while (cursor.moveToNext());
+        }
+
+        return results;
+    }
+
 }
