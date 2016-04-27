@@ -138,7 +138,7 @@ public class SlotService {
         } else {
             db = databaseHelper.getWritableDatabase();
             Cursor cursor = db.query(SlotTable.TABLE_NAME.getValue(),
-                    null,
+                    new String[] {"sum(quantity)"},
                     SlotTable.MATCH_ID + "=?",
                     new String[] {String.valueOf(matchId)},
                     null, null, null, null);

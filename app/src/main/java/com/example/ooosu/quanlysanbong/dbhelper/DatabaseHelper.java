@@ -73,6 +73,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into users(username, password, email, phone_number, status, district_id, user_type, last_login, is_verified, verification_code, created, updated, deleted) values('onlinesoccer', '123456', 'abc@onlinesoccer@gmail.com', '016434467809', 1, 1, 1, datetime('now'), 1, null, datetime('now'), null, null);");
         db.execSQL("insert into users(username, password, email, phone_number, status, district_id, user_type, last_login, is_verified, verification_code, created, updated, deleted) values('onlinesoccer1', '123456', 'abc@onlinesoccer@gmail.com', '016434467809', 1, 1, 1, datetime('now'), 1, null, datetime('now'), null, null);");
 
+        // match
+        db.execSQL("insert into matches(field_id, host_id, status, maximum_players, price, start_time, end_time, is_verified, verification_code, created, updated, deleted) values (1, 1, 1, 15, 100, datetime('now', '+1440 minutes'), datetime('now', '+1560 minutes'), 1, null, datetime('now'), null, null);");
+
+        // slot
+        db.execSQL("insert into slots(match_id, user_id, quantity, is_verified, verification_code, created, updated, deleted) values(1, 2, 4, 1, null, date('now'), null, null);");
+
     }
 
     @Override
