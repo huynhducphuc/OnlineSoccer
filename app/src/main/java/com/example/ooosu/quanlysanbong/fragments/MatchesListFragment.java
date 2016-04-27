@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.adapter.MatchAdapter;
+import com.example.ooosu.quanlysanbong.model.bean.Match;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -28,13 +29,13 @@ public class MatchesListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.matches_list_layout, container, false);
         //lay du lieu
-        ArrayList<Matches> matchList = new ArrayList<Matches>();
+        ArrayList<Match> matchList = new ArrayList<Match>();
         Date date = new Date();
-        matchList.add(new Matches(1,100000,new Timestamp((long)date.getTime()),1,12));
-        matchList.add(new Matches(2,100000,new Timestamp((long)date.getTime()),1,12));
-        matchList.add(new Matches(3,100000,new Timestamp((long)date.getTime()),1,12));
-        matchList.add(new Matches(4,100000,new Timestamp((long)date.getTime()),1,12));
-        matchList.add(new Matches(5,100000,new Timestamp((long)date.getTime()),1,12));
+//        matchList.add(new Match(1,100000,new Timestamp((long)date.getTime()),1,12));
+//        matchList.add(new Match(2,100000,new Timestamp((long)date.getTime()),1,12));
+//        matchList.add(new Match(3,100000,new Timestamp((long)date.getTime()),1,12));
+//        matchList.add(new Match(4,100000,new Timestamp((long)date.getTime()),1,12));
+//        matchList.add(new Match(5,100000,new Timestamp((long)date.getTime()),1,12));
         //nap adapter
         ListView listView = (ListView) myView.findViewById(R.id.matches_listview);
         MatchAdapter matchAdapter = new MatchAdapter((MainActivity)getActivity(),R.layout.item_match_listview,matchList);

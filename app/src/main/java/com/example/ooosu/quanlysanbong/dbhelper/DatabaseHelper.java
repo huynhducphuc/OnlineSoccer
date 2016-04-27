@@ -5,10 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
-
-import com.example.noname.onlinesoccer.bean.City;
-import com.example.noname.onlinesoccer.bean.District;
-
 /**
  * Created by Noname on 26/4/2016.
  */

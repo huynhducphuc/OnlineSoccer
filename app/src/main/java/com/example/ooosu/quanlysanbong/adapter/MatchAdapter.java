@@ -14,18 +14,19 @@ import android.widget.TextView;
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.activities.MatchDetailActivity;
+import com.example.ooosu.quanlysanbong.model.bean.Match;
 
 import java.util.ArrayList;
 
 /**
  * Created by oOosu on 4/26/2016.
  */
-public class MatchAdapter extends ArrayAdapter<Matches> {
+public class MatchAdapter extends ArrayAdapter<Match> {
     private Activity mContext = null;
     private int idLayout;
-    ArrayList<Matches> matchesList = null;
+    ArrayList<Match> matchesList = null;
 
-    public MatchAdapter(Activity mContext, int idLayout, ArrayList<Matches> matchesList) {
+    public MatchAdapter(Activity mContext, int idLayout, ArrayList<Match> matchesList) {
         super(mContext, idLayout, matchesList);
         this.mContext = mContext;
         this.idLayout = idLayout;
@@ -45,7 +46,7 @@ public class MatchAdapter extends ArrayAdapter<Matches> {
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder viewHolder = null;
-        Log.d("list"," gia tri cua list :"+matchesList.size());
+        Log.d("list", " gia tri cua list :" + matchesList.size());
         if(view!=null){
             viewHolder = (ViewHolder) view.getTag();
         }else{
@@ -62,8 +63,8 @@ public class MatchAdapter extends ArrayAdapter<Matches> {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                Matches matches = matchesList.get(position);
-                bundle.putInt("match_id",matches.getMatch_id());
+                Match matches = matchesList.get(position);
+                bundle.putInt("match_id",matches.getId());
                 bundle.putInt("chooise",((MainActivity)mContext).chooise);
                 Intent intent = new Intent(mContext,MatchDetailActivity.class);
                 intent.putExtras(bundle);
@@ -71,11 +72,11 @@ public class MatchAdapter extends ArrayAdapter<Matches> {
             }
         });
 
-        Matches matches = matchesList.get(position);
-        viewHolder.txtFieldName.setText("Nguyễn Chánh FC "+ matches.getField_id());
+        Match match = matchesList.get(position);
+        viewHolder.txtFieldName.setText("Nguyễn Chánh FC " + match.getFieldId());
         viewHolder.txtStartTime.setText("0:20-26/04/16 (Còn 2 ngày nữa)");
-        viewHolder.txtPrice.setText(matches.getPrice()+"");
-        viewHolder.txtSeats.setText(matches.getMaximum_players()+"");
+        viewHolder.txtPrice.setText(match.getPrice()+"");
+        viewHolder.txtSeats.setText(match.getMaxPlayers()+"");
         notifyDataSetChanged();
         return view;
     }

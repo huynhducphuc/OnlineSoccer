@@ -103,14 +103,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/place"
             android:layout_gravity="center"/>
-        <EditText
-            android:id="@+id/txtAddress"
+        <Spinner
             android:layout_width="0dp"
             android:layout_weight="9"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:inputType="text"
-            android:hint="Address"/>
+            android:id="@+id/spinnerAddress" />
     </LinearLayout>
     <Button
         android:id="@+id/btnRegister"

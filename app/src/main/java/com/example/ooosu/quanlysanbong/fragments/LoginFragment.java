@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.ForgotPasswordActivity;
 import com.example.ooosu.quanlysanbong.activities.LoginActivity;
-import com.example.ooosu.quanlysanbong.database.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
+import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 
 public class LoginFragment extends Fragment {
 
@@ -44,13 +44,13 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
-                    String storedPassword = databaseHelper.getSinlgeEntry(txtUsername.getText().toString());
-                    String password = txtPassword.getText().toString();
-                    if (password.equals(storedPassword))
+                //if(validate()){
+//                    String storedPassword = databaseHelper.getSinlgeEntry(txtUsername.getText().toString());
+//                    String password = txtPassword.getText().toString();
+//                    if (password.equals(storedPassword))
                         onLoginSuccess();
-                    else onLoginFailed();
-                }
+//                    else onLoginFailed();
+                //}
             }
         });
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -80,14 +80,14 @@ public class LoginFragment extends Fragment {
         String password = txtPassword.getText().toString();
 
 
-        if (username.isEmpty() || username.length() < 4 || username.length() > 10) {
-            txtUsername.setError("Between 4 and 10 alphanumeric characters!");
+        if (username.isEmpty() || username.length() < 4 || username.length() > 16) {
+            txtUsername.setError("Between 4 and 16 alphanumeric characters!");
             valid = false;
         } else {
             txtUsername.setError(null);
         }
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-             txtPassword.setError("Between 4 and 10 alphanumeric characters!");
+        if (password.isEmpty() || password.length() < 4 || password.length() > 16) {
+             txtPassword.setError("Between 4 and 16 alphanumeric characters!");
             valid = false;
         } else {
             txtPassword.setError(null);
