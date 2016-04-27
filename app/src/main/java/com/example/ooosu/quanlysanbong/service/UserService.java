@@ -58,12 +58,12 @@ public class UserService {
                         cursor.getInt(5),
                         cursor.getInt(6),
                         cursor.getInt(7),
-                        Timestamp.valueOf(cursor.getString(8)),
+                        DateUtils.convertToTimestamp(cursor.getString(8)),
                         cursor.getInt(9) > 0,
                         cursor.getString(10),
-                        Timestamp.valueOf(cursor.getString(11)),
-                        Timestamp.valueOf(cursor.getString(12)),
-                        Timestamp.valueOf(cursor.getString(13)));
+                        DateUtils.convertToTimestamp(cursor.getString(11)),
+                        DateUtils.convertToTimestamp(cursor.getString(12)),
+                        DateUtils.convertToTimestamp(cursor.getString(13)));
             }
             return user;
         }
@@ -165,6 +165,50 @@ public class UserService {
         } else {
             db = databaseHelper.getWritableDatabase();
             return db.delete(UserTable.TABLE_NAME.getValue(), UserTable.USER_ID + "=?", new String[]{String.valueOf(user.getId())});
+        }
+    }
+
+    public User getUser(String username, String password) {
+        if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+            return null;
+        } else {
+            User user = null;
+            db = databaseHelper.getWritableDatabase();
+            Cursor cursor = db.query(UserTable.TABLE_NAME.getValue(),
+                    new String[]{UserTable.USER_ID.getValue(),
+                            UserTable.USERNAME.getValue(),
+                            UserTable.PASSWORD.getValue(),
+                            UserTable.EMAIL.getValue(),
+                            UserTable.PHONE_NUMBER.getValue(),
+                            UserTable.STATUS.getValue(),
+                            UserTable.DISTRICT_ID.getValue(),
+                            UserTable.USER_TYPE.getValue(),
+                            UserTable.LAST_LOGIN.getValue(),
+                            UserTable.VERIFIED.getValue(),
+                            UserTable.VERIFICATION_CODE.getValue(),
+                            UserTable.CREATED.getValue(),
+                            UserTable.UPDATED.getValue(),
+                            UserTable.DELETED.getValue()},
+                    UserTable.USERNAME + "=? and " + UserTable.PASSWORD + "=?",
+                    new String[]{username, password},
+                    null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                user = new User(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5),
+                        cursor.getInt(6),
+                        cursor.getInt(7),
+                        DateUtils.convertToTimestamp(cursor.getString(8)),
+                        cursor.getInt(9) > 0,
+                        cursor.getString(10),
+                        DateUtils.convertToTimestamp(cursor.getString(11)),
+                        DateUtils.convertToTimestamp(cursor.getString(12)),
+                        DateUtils.convertToTimestamp(cursor.getString(13)));
+            }
+            return user;
         }
     }
 
