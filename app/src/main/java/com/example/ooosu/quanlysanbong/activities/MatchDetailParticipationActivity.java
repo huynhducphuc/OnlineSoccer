@@ -33,15 +33,16 @@ import java.util.List;
 /**
  * Created by oOosu on 4/28/2016.
  */
-public class MatchDetailParticipationActivity extends AppCompatActivity{
+public class MatchDetailParticipationActivity extends AppCompatActivity {
     ImageButton imgGoToMapAndroid;
-    private TextView tv_detail_fieldname,tv_detail_district,tv_detail_hostuser,tv_detail_maxplayers,tv_detail_price,tv_detail_starttime,tv_detail_endtime,tv_detail_created;
+    private TextView tv_detail_fieldname, tv_detail_district, tv_detail_hostuser, tv_detail_maxplayers, tv_detail_price, tv_detail_starttime, tv_detail_endtime, tv_detail_created;
     private EditText txt_detail_number;
     private Button btnCancel_detail_participation;
     private Bundle bundle;
-    private int chooise,match_id,user_id;
-    private float latitude,longitude;
+    private int chooise, match_id, user_id;
+    private float latitude, longitude;
     private String address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +74,9 @@ public class MatchDetailParticipationActivity extends AppCompatActivity{
         Match match = new MatchService(this).getMatch(match_id);
         Log.d("detail", "" + match.toString());
         List<Field> fieldList = new FieldService(this).getAllFields();
-        if(fieldList!=null) {
+        if (fieldList != null) {
             for (Field field : fieldList) {
-                Log.d("detail2", ""+field.toString());
+                Log.d("detail2", "" + field.toString());
                 if (field.getId() == match.getFieldId()) {
                     tv_detail_fieldname.setText(field.getName());
                     address = field.getAddress();
@@ -86,18 +87,18 @@ public class MatchDetailParticipationActivity extends AppCompatActivity{
             }
         }
         List<User> userList = new UserService(getApplication().getApplicationContext()).getAllUsers();
-        if(userList!=null){
-            for (User user: userList){
-                if (user.getId()==match.getHostId())
+        if (userList != null) {
+            for (User user : userList) {
+                if (user.getId() == match.getHostId())
                     tv_detail_hostuser.setText(user.getUsername());
             }
         }
-        tv_detail_maxplayers.setText(match.getMaxPlayers()+"");
-        tv_detail_price.setText(match.getPrice()+"");
+        tv_detail_maxplayers.setText(match.getMaxPlayers() + "");
+        tv_detail_price.setText(match.getPrice() + " VND");
         tv_detail_starttime.setText(DateUtils.formatDatetime(match.getStartTime(), DateUtils.FOR_SCREEN));
-        tv_detail_endtime.setText(DateUtils.formatDatetime(match.getEndTime(),DateUtils.FOR_SCREEN));
-        tv_detail_created.setText(DateUtils.formatDatetime(match.getCreatedDate(),DateUtils.FOR_SCREEN));
-        imgGoToMapAndroid = (ImageButton)findViewById(R.id.imgGoToMapAndroid);
+        tv_detail_endtime.setText(DateUtils.formatDatetime(match.getEndTime(), DateUtils.FOR_SCREEN));
+        tv_detail_created.setText(DateUtils.formatDatetime(match.getCreatedDate(), DateUtils.FOR_SCREEN));
+        imgGoToMapAndroid = (ImageButton) findViewById(R.id.imgGoToMapAndroid);
         imgGoToMapAndroid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +111,7 @@ public class MatchDetailParticipationActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-        if(match.getStartTime().before(DateUtils.convertToTimestamp(new Date()))){
+        if (match.getStartTime().before(DateUtils.convertToTimestamp(new Date()))) {
             btnCancel_detail_participation.setVisibility(View.INVISIBLE);
         }
         btnCancel_detail_participation.setOnClickListener(new View.OnClickListener() {
@@ -124,11 +125,11 @@ public class MatchDetailParticipationActivity extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SlotService slotService = new SlotService(getApplicationContext());
-                        slotService.deleteSlot(match_id,user_id);
-                        Toast.makeText(getApplicationContext(), "Hủy trận thành công", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        slotService.deleteSlot(match_id, user_id);
+                        Toast.makeText(getApplicationContext(), "Canceled successfully !", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         Bundle bundle2 = new Bundle();
-                        bundle2.putInt("user_id",user_id);
+                        bundle2.putInt("user_id", user_id);
                         intent.putExtras(bundle2);
                         startActivity(intent);
                     }
@@ -150,7 +151,7 @@ public class MatchDetailParticipationActivity extends AppCompatActivity{
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 Bundle bundleSend = new Bundle();
-                bundleSend.putInt("chooise2",3);
+                bundleSend.putInt("chooise2", 3);
                 getIntent().putExtras(bundleSend);
                 setResult(121, getIntent());
                 finish();

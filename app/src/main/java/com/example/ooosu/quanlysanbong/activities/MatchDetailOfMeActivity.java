@@ -98,7 +98,7 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
             }
         }
         tv_detail_maxplayers.setText(match.getMaxPlayers()+"");
-        tv_detail_price.setText(match.getPrice()+"");
+        tv_detail_price.setText(match.getPrice()+" VND");
         tv_detail_starttime.setText(DateUtils.formatDatetime(match.getStartTime(), DateUtils.FOR_SCREEN));
         tv_detail_endtime.setText(DateUtils.formatDatetime(match.getEndTime(),DateUtils.FOR_SCREEN));
         tv_detail_created.setText(DateUtils.formatDatetime(match.getCreatedDate(),DateUtils.FOR_SCREEN));
@@ -132,7 +132,7 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
                         SlotService slotService = new SlotService(getApplicationContext());
                         slotService.deleteSlot(match_id);
                         matchService.deleteMatch(match);
-                        Toast.makeText(getApplicationContext(), "Hủy trận thành công", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Canceled successfully !", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         Bundle bundle2 = new Bundle();
                         bundle2.putInt("user_id",user_id);

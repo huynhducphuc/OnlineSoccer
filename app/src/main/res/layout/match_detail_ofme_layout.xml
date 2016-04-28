@@ -9,8 +9,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/fieldname"/>
         <TextView
@@ -39,9 +39,9 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
             android:background="@drawable/place"/>
         <TextView
             android:layout_gravity="center"
@@ -75,8 +75,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/user"/>
         <TextView
@@ -105,8 +105,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/maximumplayer"/>
         <TextView
@@ -135,8 +135,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/price"/>
         <TextView
@@ -165,8 +165,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/start"/>
         <TextView
@@ -195,8 +195,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/end"/>
         <TextView
@@ -225,8 +225,8 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:background="@drawable/iscreate"/>
         <TextView
@@ -250,9 +250,10 @@
             android:text="12/22/2015 9:09:00"/>
     </LinearLayout>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:id="@+id/btnCancel_detail_ofme"
         android:background="@color/color_main"
         android:textColor="#fff"

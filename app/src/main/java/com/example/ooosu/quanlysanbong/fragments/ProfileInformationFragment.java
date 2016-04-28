@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,16 +31,18 @@ import java.util.List;
 /**
  * Created by user on 12/31/15.
  */
-public class ProfileInformationFragment extends Fragment{
+public class ProfileInformationFragment extends Fragment {
 
     View myView;
     private int districtBefore;
     private Button btnUpdateProfile;
-    private EditText txt_profile_username,txt_profile_phonenumber,txt_profile_lastLogin,txt_profile_usertype,txt_profile_verifiedmember,txt_profile_joindate,txt_profile_email;
+    private EditText txt_profile_username, txt_profile_phonenumber, txt_profile_lastLogin, txt_profile_usertype, txt_profile_joindate, txt_profile_email;
     private Spinner spinner_profile_district;
+    private CheckBox cbVerified;
     private List<District> districtList = null;
     private String idDistrictString;
     private int idDistrict;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class ProfileInformationFragment extends Fragment{
         txt_profile_phonenumber = (EditText) myView.findViewById(R.id.txt_profile_phonenumber);
         txt_profile_lastLogin = (EditText) myView.findViewById(R.id.txt_profile_lastLogin);
         txt_profile_usertype = (EditText) myView.findViewById(R.id.txt_profile_usertype);
-        txt_profile_verifiedmember = (EditText) myView.findViewById(R.id.txt_profile_verifiedmember);
+        cbVerified = (CheckBox) myView.findViewById(R.id.cbVerified);
         txt_profile_joindate = (EditText) myView.findViewById(R.id.txt_profile_joindate);
         txt_profile_email = (EditText) myView.findViewById(R.id.txt_profile_email);
         btnUpdateProfile = (Button) myView.findViewById(R.id.btnUpdateProfile);
@@ -61,25 +64,25 @@ public class ProfileInformationFragment extends Fragment{
         txt_profile_phonenumber.setText(user.getPhoneNumber());
         txt_profile_lastLogin.setText(DateUtils.formatDatetime(user.getLastLogin(), DateUtils.FOR_SCREEN));
         String user_type = "";
-        if(user.getUserType()==0) user_type = "Admin";
+        if (user.getUserType() == 0) user_type = "Admin";
         else user_type = "User";
         txt_profile_usertype.setText(user_type);
-        txt_profile_verifiedmember.setText(user.getVerificationCode());
-        txt_profile_joindate.setText(DateUtils.formatDatetime(user.getCreatedDate(),DateUtils.FOR_SCREEN));
+        cbVerified.setChecked(user.isVerified());
+        txt_profile_joindate.setText(DateUtils.formatDatetime(user.getCreatedDate(), DateUtils.FOR_SCREEN));
         txt_profile_email.setText(user.getEmail());
 
         districtList = new DistrictService(getActivity().getApplicationContext()).getAllDistricts();
         List<String> list = new ArrayList<String>();
         //lay chuoi district cho spinner, chuoi district tu ma~ district user
-        if(districtList!=null){
-            for(int i=0;i<districtList.size();i++){
+        if (districtList != null) {
+            for (int i = 0; i < districtList.size(); i++) {
                 list.add(districtList.get(i).getName());
-                if(user.getDistrictId()==districtList.get(i).getId())
+                if (user.getDistrictId() == districtList.get(i).getId())
                     districtBefore = i;
             }
         }
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((MainActivity)getActivity(),android.R.layout.simple_spinner_item,list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((MainActivity) getActivity(), android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_profile_district.setAdapter(dataAdapter);
         spinner_profile_district.setSelection(districtBefore);
@@ -105,21 +108,22 @@ public class ProfileInformationFragment extends Fragment{
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
+                if (validate()) {
                     user.setDistrictId(idDistrict);
                     user.setUsername(txt_profile_username.getText().toString());
                     user.setPhoneNumber(txt_profile_phonenumber.getText().toString());
                     user.setEmail(txt_profile_email.getText().toString());
                     user.setUpdatedDate(DateUtils.convertToTimestamp(new Date()));
                     new UserService(getActivity().getApplicationContext()).updateUser(user);
-                    Toast.makeText(getActivity().getApplicationContext(), "Cập nhật thành công", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Updated successfully !", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
         return myView;
     }
-    public boolean validate(){
+
+    public boolean validate() {
         boolean valid = true;
         String username = txt_profile_username.getText().toString();
         String phone = txt_profile_phonenumber.getText().toString();
@@ -140,7 +144,7 @@ public class ProfileInformationFragment extends Fragment{
         if (phone.isEmpty() || !Patterns.PHONE.matcher(phone).matches()) {
             txt_profile_phonenumber.setError("Enter a valid phone number");
             valid = false;
-        }else{
+        } else {
             txt_profile_phonenumber.setError(null);
         }
         return valid;

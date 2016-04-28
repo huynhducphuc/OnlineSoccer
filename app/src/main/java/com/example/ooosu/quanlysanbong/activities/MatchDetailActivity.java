@@ -37,14 +37,15 @@ import java.util.Random;
  */
 public class MatchDetailActivity extends AppCompatActivity {
     ImageButton imgGoToMapAndroid;
-    private TextView tv_detail_fieldname,tv_detail_district,tv_detail_hostuser,tv_detail_maxplayers,tv_detail_price,tv_detail_starttime,tv_detail_endtime,tv_detail_created;
+    private TextView tv_detail_fieldname, tv_detail_district, tv_detail_hostuser, tv_detail_maxplayers, tv_detail_price, tv_detail_starttime, tv_detail_endtime, tv_detail_created;
     private EditText txt_detail_number;
     private Button btnJoinMatch;
     private Bundle bundle;
-    private int chooise,user_id ;
-    private float latitude,longitude;
+    private int chooise, user_id;
+    private float latitude, longitude;
     private String address;
     Match match;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,11 +75,11 @@ public class MatchDetailActivity extends AppCompatActivity {
         user_id = bundle.getInt("user_id");
         //Lay du lieu cho form
         match = new MatchService(this).getMatch(match_id);
-        Log.d("detail", ""+match.toString());
+        Log.d("detail", "" + match.toString());
         List<Field> fieldList = new FieldService(this).getAllFields();
-        if(fieldList!=null) {
+        if (fieldList != null) {
             for (Field field : fieldList) {
-                Log.d("detail2", ""+field.toString());
+                Log.d("detail2", "" + field.toString());
                 if (field.getId() == match.getFieldId()) {
                     tv_detail_fieldname.setText(field.getName());
                     address = field.getAddress();
@@ -89,18 +90,18 @@ public class MatchDetailActivity extends AppCompatActivity {
             }
         }
         List<User> userList = new UserService(getApplication().getApplicationContext()).getAllUsers();
-        if(userList!=null){
-            for (User user: userList){
-                if (user.getId()==match.getHostId())
+        if (userList != null) {
+            for (User user : userList) {
+                if (user.getId() == match.getHostId())
                     tv_detail_hostuser.setText(user.getUsername());
             }
         }
-        tv_detail_maxplayers.setText(match.getMaxPlayers()+"");
-        tv_detail_price.setText(match.getPrice()+"");
+        tv_detail_maxplayers.setText(match.getMaxPlayers() + "");
+        tv_detail_price.setText(match.getPrice() + " VND");
         tv_detail_starttime.setText(DateUtils.formatDatetime(match.getStartTime(), DateUtils.FOR_SCREEN));
-        tv_detail_endtime.setText(DateUtils.formatDatetime(match.getEndTime(),DateUtils.FOR_SCREEN));
-        tv_detail_created.setText(DateUtils.formatDatetime(match.getCreatedDate(),DateUtils.FOR_SCREEN));
-        imgGoToMapAndroid = (ImageButton)findViewById(R.id.imgGoToMapAndroid);
+        tv_detail_endtime.setText(DateUtils.formatDatetime(match.getEndTime(), DateUtils.FOR_SCREEN));
+        tv_detail_created.setText(DateUtils.formatDatetime(match.getCreatedDate(), DateUtils.FOR_SCREEN));
+        imgGoToMapAndroid = (ImageButton) findViewById(R.id.imgGoToMapAndroid);
         imgGoToMapAndroid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,28 +121,26 @@ public class MatchDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String error = "";
                 SlotService slotService = new SlotService(getApplicationContext());
-                if(match.getHostId()==user_id){
-                    error="This is your match!Can not register!";
+                if (match.getHostId() == user_id) {
+                    error = "You can not register your own match!";
                     showDialog(error).create().show();
-                }else if(slotService.getSlot(match.getId(),user_id)!=null){
-                    error="You already registered!";
+                } else if (slotService.getSlot(match.getId(), user_id) != null) {
+                    error = "You already registered!";
                     showDialog(error).create().show();
-                }
-                else if(validate()){
-                    Long slotexits = (Long) (match.getMaxPlayers()-slotService.countSlots(match.getId())-1);
+                } else if (validate()) {
+                    Long slotexits = (Long) (match.getMaxPlayers() - slotService.countSlots(match.getId()) - 1);
                     int quantity = Integer.parseInt(txt_detail_number.getText().toString());
-                    if(quantity>slotexits){
-                        error="Not enough slot";
+                    if (quantity > slotexits) {
+                        error = "Not enough slots";
                         showDialog(error).create().show();
-                    }
-                    else {
+                    } else {
                         Random random = new Random();
                         int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
-                        slotService.addSlot(new Slot(match.getId(),user_id,quantity,false,String.valueOf(verificationCode),DateUtils.convertToTimestamp(new Date()),null,null));
-                        Toast.makeText(getApplicationContext(),"Đăng ký thành công",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        slotService.addSlot(new Slot(match.getId(), user_id, quantity, false, String.valueOf(verificationCode), DateUtils.convertToTimestamp(new Date()), null, null));
+                        Toast.makeText(getApplicationContext(), "Registered successfully !", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         Bundle bundle2 = new Bundle();
-                        bundle2.putInt("user_id",user_id);
+                        bundle2.putInt("user_id", user_id);
                         intent.putExtras(bundle2);
                         startActivity(intent);
                     }
@@ -149,7 +148,8 @@ public class MatchDetailActivity extends AppCompatActivity {
             }
         });
     }
-    public AlertDialog.Builder showDialog(String message){
+
+    public AlertDialog.Builder showDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MatchDetailActivity.this);
         builder.setTitle("Message");
         builder.setMessage(message);
@@ -169,7 +169,7 @@ public class MatchDetailActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 Bundle bundleSend = new Bundle();
-                bundleSend.putInt("chooise2",1);
+                bundleSend.putInt("chooise2", 1);
                 getIntent().putExtras(bundleSend);
                 setResult(101, getIntent());
                 finish();
@@ -177,12 +177,13 @@ public class MatchDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public boolean validate(){
+
+    public boolean validate() {
         boolean valid = true;
-        if(txt_detail_number.getText().toString().isEmpty()){
-            txt_detail_number.setError("Please enter number member attend");
+        if (txt_detail_number.getText().toString().isEmpty()) {
+            txt_detail_number.setError("Please enter the number of members !");
             valid = false;
-        }else txt_detail_number.setError(null);
+        } else txt_detail_number.setError(null);
         return valid;
     }
 }

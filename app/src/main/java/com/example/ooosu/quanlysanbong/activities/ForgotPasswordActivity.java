@@ -23,6 +23,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private EditText editEmailConfirm;
     private Button btnConfirmByEmail;
     private ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,18 +39,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         btnConfirmByEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
+                if (validate()) {
 //                    new AlertDialog.Builder(getApplicationContext())
 //                        .setTitle("Message")
 //                        .setMessage("We have send code for you to "+editEmailConfirm.getText().toString())
 //                        .show();
                     AlertDialog alertDialog = new AlertDialog.Builder(ForgotPasswordActivity.this).create();
                     alertDialog.setTitle("Message");
-                    alertDialog.setMessage("We have send code for you to " + editEmailConfirm.getText().toString());
+                    alertDialog.setMessage("We have sent code for you to " + editEmailConfirm.getText().toString());
                     alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -59,13 +60,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean validate(){
+
+    public boolean validate() {
         boolean valid = true;
         String email = editEmailConfirm.getText().toString();
-        if(email.isEmpty()|| !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editEmailConfirm.setError("Enter a valid email address");
             valid = false;
-        }else{
+        } else {
             editEmailConfirm.setError(null);
         }
         return valid;

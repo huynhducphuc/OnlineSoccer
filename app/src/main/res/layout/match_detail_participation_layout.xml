@@ -1,260 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_layout">
+    android:layout_margin="@dimen/margin_layout"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:background="@drawable/fieldname"/>
+            android:background="@drawable/fieldname" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:textSize="@dimen/textSize_detail"
-            android:textColor="@color/color_black"
-            android:layout_weight="3"
             android:layout_width="0dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
             android:text="Field Name"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
+
         <TextView
             android:id="@+id/tv_detail_fieldname"
-            android:textColor="@color/color_black"
-            android:layout_weight="5"
             android:layout_width="0dp"
-            android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Chi Lăng FC Chi Lăng FCChi Lăng FCChi Lăng FC"/>
+            android:layout_weight="5"
+            android:text="Chi Lăng FC Chi Lăng FCChi Lăng FCChi Lăng FC"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:background="@drawable/place"/>
+            android:background="@drawable/place" />
+
         <TextView
-            android:layout_gravity="center"
-            android:paddingLeft="10dp"
-            android:layout_weight="4"
-            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_detail"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:paddingLeft="10dp"
             android:text="Address"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
+
         <TextView
+            android:id="@+id/tv_detail_district"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="6"
-            android:layout_width="0dp"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_height="wrap_content"
+            android:text="10 Phan Châu Trinh 1234567891212"
             android:textColor="@color/color_black"
-            android:id="@+id/tv_detail_district"
-            android:text="10 Phan Châu Trinh 1234567891212"/>
+            android:textSize="@dimen/textSize_detail" />
+
         <ImageButton
+            android:id="@+id/imgGoToMapAndroid"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/direct"
             android:layout_gravity="center"
-            android:id="@+id/imgGoToMapAndroid"/>
+            android:background="@drawable/direct" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:background="@drawable/user"/>
+            android:background="@drawable/user" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:layout_gravity="center"
-            android:textSize="@dimen/textSize_detail"
-            android:textColor="@color/color_black"
-            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
             android:text="Host User"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
+
         <TextView
-            android:layout_weight="5"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_height="wrap_content"
             android:id="@+id/tv_detail_hostuser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:text="Admin"
             android:textColor="@color/color_black"
-            android:text="Admin"/>
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:background="@drawable/maximumplayer"/>
+            android:background="@drawable/maximumplayer" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:textSize="@dimen/textSize_detail"
-            android:textColor="@color/color_black"
-            android:layout_weight="3"
             android:layout_width="0dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
             android:text="MaxPlayers"
-            />
-        <TextView
-            android:layout_weight="5"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
             android:textColor="@color/color_black"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize_detail" />
+
+        <TextView
             android:id="@+id/tv_detail_maxplayers"
-            android:text="12"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:text="12"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:background="@drawable/price"/>
+            android:background="@drawable/price" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_weight="3"
-            android:layout_gravity="center"
-            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
             android:text="Price"
-            />
-        <TextView
-            android:layout_weight="5"
             android:textColor="@color/color_black"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize_detail" />
+
+        <TextView
             android:id="@+id/tv_detail_price"
-            android:text="100000"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:text="100000"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:background="@drawable/start"/>
+            android:background="@drawable/start" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_weight="3"
             android:layout_width="0dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
             android:text="Start Time"
-            />
-        <TextView
-            android:layout_weight="5"
-            android:layout_gravity="center"
             android:textColor="@color/color_black"
-            android:layout_width="0dp"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize_detail" />
+
+        <TextView
             android:id="@+id/tv_detail_starttime"
-            android:text="12/23/2015 12:12:00"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:text="12/23/2015 12:12:00"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
-            android:background="@drawable/end"/>
+            android:background="@drawable/end" />
+
         <TextView
-            android:paddingLeft="10dp"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_weight="3"
-            android:layout_gravity="center"
-            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:paddingLeft="10dp"
             android:text="End Time"
-            />
-        <TextView
-            android:layout_weight="5"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
             android:textColor="@color/color_black"
-            android:textSize="@dimen/textSize_detail"
+            android:textSize="@dimen/textSize_detail" />
+
+        <TextView
             android:id="@+id/tv_detail_endtime"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="12/23/2015 13:12:00"/>
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:text="12/23/2015 13:12:00"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/paddingbetweenline">
+
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:background="@drawable/iscreate" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/iscreate"/>
-        <TextView
-            android:paddingLeft="10dp"
-            android:textSize="@dimen/textSize_detail"
             android:layout_weight="3"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:textColor="@color/color_black"
-            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
             android:text="Created"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_detail" />
+
         <TextView
-            android:layout_weight="5"
+            android:id="@+id/tv_detail_created"
             android:layout_width="0dp"
-            android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="5"
+            android:text="12/22/2015 9:09:00"
             android:textColor="@color/color_black"
-            android:id="@+id/tv_detail_created"
-            android:text="12/22/2015 9:09:00"/>
+            android:textSize="@dimen/textSize_detail" />
     </LinearLayout>
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Exit"
         android:id="@+id/btnCancel_detail_participation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@color/color_main"
-        android:textColor="#fff"
-        android:layout_gravity="center"/>
+        android:text="Exit"
+        android:textColor="#fff" />
 </LinearLayout>

@@ -39,11 +39,11 @@ public class ChangePasswordFragment extends Fragment {
                     UserService userService = new UserService(getActivity().getApplicationContext());
                     User user = userService.getUser(SessionManager.getSessionManager(getActivity().getApplicationContext()).getUser().getId());
                     if(!user.getPassword().equals(txtCurrentPassword.getText().toString())){
-                        txtCurrentPassword.setError("incorrect");
+                        txtCurrentPassword.setError("Current password is incorrect !");
                     }else {
                         user.setPassword(txtNewPassword.getText().toString());
                         userService.updateUser(user);
-                        Toast.makeText(getActivity().getApplicationContext(),"Cập nhật thành công",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(),"Updated successfully !",Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -79,7 +79,7 @@ public class ChangePasswordFragment extends Fragment {
 
         if(!passwordconfirm.equals(password))
         {
-            txtConfirmPassword.setError("incorrect");
+            txtConfirmPassword.setError("Confirm password does not match !");
             valid = false;
         }else  txtConfirmPassword.setError(null);
         return valid;

@@ -34,12 +34,12 @@ import com.example.ooosu.quanlysanbong.utils.SessionManager;
 /**
  * Created by oOosu on 4/21/2016.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public FragmentManager fragmentManager;
-    public Integer user_id = null ;
+    public Integer user_id = null;
     public Menu menu;
     public ActionBar actionBar;
-    public int chooise=-1;
+    public int chooise = -1;
     public MatchAdapter matchAdapter = null;
     private String fragment_layout = null;
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Bundle bundle = getIntent().getExtras();
         user_id = bundle.getInt("user_id");
-        if(bundle.getString("mymatch")!=null)
+        if (bundle.getString("mymatch") != null)
             fragment_layout = bundle.getString("mymatch");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,13 +69,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getFragmentManager();
-        if(fragment_layout!=null&&fragment_layout.equals("mymatch")){
+        if (fragment_layout != null && fragment_layout.equals("mymatch")) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
             actionBar.setTitle("My matches");
-        }else {
+        } else {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
         }
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(matchAdapter!=null) matchAdapter.filter(newText);
+                if (matchAdapter != null) matchAdapter.filter(newText);
                 return false;
             }
         });
@@ -137,24 +138,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             menu.findItem(R.id.action_search).setVisible(true);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
         } else if (id == R.id.nav_myparticipation_layout) {
-            actionBar.setTitle("My Participation");
+            actionBar.setTitle("Joined Matches");
             menu.findItem(R.id.action_search).setVisible(true);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MyParticipationFragment()).commit();
-        }else if (id == R.id.nav_creatematch_layout) {
+        } else if (id == R.id.nav_creatematch_layout) {
             actionBar.setTitle("Setup A Match");
             menu.findItem(R.id.action_search).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SetupAMatchFragment()).commit();
         } else if (id == R.id.nav_viewprofile_layout) {
-            actionBar.setTitle("Profile Infomation");
+            actionBar.setTitle("Profile Information");
             menu.findItem(R.id.action_search).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ProfileInformationFragment()).commit();
-        }else if (id == R.id.nav_changepassword_layout) {
+        } else if (id == R.id.nav_changepassword_layout) {
             actionBar.setTitle("Change Password");
             menu.findItem(R.id.action_search).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ChangePasswordFragment()).commit();
-        }else if (id == R.id.nav_logout_layout) {
+        } else if (id == R.id.nav_logout_layout) {
             SessionManager.getSessionManager(this).clear();
-            Intent intent = new Intent(this,LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
@@ -167,8 +168,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==100){
-            if(resultCode==101) {
+        if (requestCode == 100) {
+            if (resultCode == 101) {
                 Bundle bundle = data.getExtras();
                 int chooise2 = bundle.getInt("chooise2");
                 if (chooise2 == 1) {
@@ -177,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
                 }
             }
-        }else if(requestCode==110){
-            if(resultCode==111){
+        } else if (requestCode == 110) {
+            if (resultCode == 111) {
                 Bundle bundle = data.getExtras();
                 int chooise2 = bundle.getInt("chooise2");
                 if (chooise2 == 2) {
@@ -187,12 +188,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
                 }
             }
-        }else if(requestCode==120){
-            if(resultCode==121){
+        } else if (requestCode == 120) {
+            if (resultCode == 121) {
                 Bundle bundle = data.getExtras();
                 int chooise2 = bundle.getInt("chooise2");
                 if (chooise2 == 3) {
-                    actionBar.setTitle("My Participation");
+                    actionBar.setTitle("Joined Matches");
                     menu.findItem(R.id.action_search).setVisible(true);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyParticipationFragment()).commit();
                 }

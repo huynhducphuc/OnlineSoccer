@@ -8,12 +8,12 @@
             android:title="Matches list" />
         <item
             android:id="@+id/nav_mymatches_layout"
-            android:icon="@drawable/yourmatches"
+            android:icon="@drawable/mycreatedmatched"
             android:title="My matches" />
         <item
             android:id="@+id/nav_myparticipation_layout"
-            android:icon="@drawable/yourmatches"
-            android:title="My Participation" />
+            android:icon="@drawable/myjoinedmatches"
+            android:title="Joined Matches" />
         <item
             android:id="@+id/nav_creatematch_layout"
             android:icon="@drawable/create"
@@ -21,7 +21,7 @@
         <item
             android:id="@+id/nav_viewprofile_layout"
             android:icon="@drawable/profile"
-            android:title="Profile infomation" />
+            android:title="Profile information" />
         <item
             android:id="@+id/nav_changepassword_layout"
             android:icon="@drawable/changepassword"

@@ -35,7 +35,7 @@ import java.util.Random;
  * Created by oOosu on 4/13/2016.
  */
 public class RegisterFragment extends Fragment {
-    private TextView txtUsername,txtPassword,txtEmail,txtPhonenumber;
+    private TextView txtUsername, txtPassword, txtEmail, txtPhonenumber;
     private Button btnRegister;
     private Spinner spinnerAddress;
     private int idDistrict;
@@ -45,7 +45,7 @@ public class RegisterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.register_fragment_layout,container,false);
+        View view = inflater.inflate(R.layout.register_fragment_layout, container, false);
 
         txtUsername = (TextView) view.findViewById(R.id.txtUser);
         txtPassword = (TextView) view.findViewById(R.id.txtPass);
@@ -69,12 +69,12 @@ public class RegisterFragment extends Fragment {
 //        districtService.addDistrict(new District("Lien Chieu",1));
         districtList = districtService.getAllDistricts();
         List<String> list = new ArrayList<String>();
-        if(districtList!=null){
-            for(District district : districtList){
+        if (districtList != null) {
+            for (District district : districtList) {
                 list.add(district.getName());
             }
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((LoginActivity)getActivity(),android.R.layout.simple_spinner_item,list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((LoginActivity) getActivity(), android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAddress.setAdapter(dataAdapter);
 
@@ -82,16 +82,17 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 idDistrictString = parent.getItemAtPosition(position).toString();
-                if(districtList!=null){
-                    for(District district : districtList){
-                        if(idDistrictString.equals(district.getName()))
+                if (districtList != null) {
+                    for (District district : districtList) {
+                        if (idDistrictString.equals(district.getName()))
                             idDistrict = district.getId();
                     }
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(parent.getContext(), "Chua chon gi ca", Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getContext(), "Chua chon gi ca", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,11 +104,11 @@ public class RegisterFragment extends Fragment {
                     Random random = new Random();
                     int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
                     User user = new User(txtUsername.getText().toString(), txtPassword.getText().toString(),
-                            txtEmail.getText().toString(), txtPhonenumber.getText().toString(), 1, idDistrict, 1,current,false,String.valueOf(verificationCode),current,null,null);
+                            txtEmail.getText().toString(), txtPhonenumber.getText().toString(), 1, idDistrict, 1, current, true, String.valueOf(verificationCode), current, null, null);
                     new UserService(getActivity().getApplicationContext()).addUser(user);
 
                     ((LoginActivity) getActivity()).changeViewPagePosition(0);
-                    Toast.makeText(getActivity().getApplicationContext(),"Đăng ký thành công",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Registered successfully !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -143,7 +144,7 @@ public class RegisterFragment extends Fragment {
         if (phone.isEmpty() || !Patterns.PHONE.matcher(phone).matches()) {
             txtPhonenumber.setError("Enter a valid phone number");
             valid = false;
-        }else{
+        } else {
             txtPhonenumber.setError(null);
         }
 

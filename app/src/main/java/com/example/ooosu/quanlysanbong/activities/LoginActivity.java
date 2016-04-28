@@ -15,16 +15,17 @@ import com.viewpagerindicator.CirclePageIndicator;
  */
 public class LoginActivity extends AppCompatActivity {
     private ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_register_layout);
 
         SessionManager sessionManager = SessionManager.getSessionManager(this);
-        if(sessionManager.isLoggedIn()){
+        if (sessionManager.isLoggedIn()) {
             Bundle bundle = new Bundle();
-            bundle.putInt("user_id",sessionManager.getUser().getId());
-            Intent intent = new Intent(this,MainActivity.class);
+            bundle.putInt("user_id", sessionManager.getUser().getId());
+            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         circlePageIndicator.setViewPager(viewPager);
     }
 
-    public void changeViewPagePosition(int position){
+    public void changeViewPagePosition(int position) {
         viewPager.setCurrentItem(position, true);
     }
 }

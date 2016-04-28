@@ -29,13 +29,14 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(16.073760, 108.149914);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Đại học Bách Khoa - ĐHDN"));
+        // LatLng sydney = new LatLng(16.073760, 108.149914);
+        // mMap.addMarker(new MarkerOptions().position(sydney).title("Đại học Bách Khoa - ĐHDN"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         Bundle bundle = getIntent().getExtras();
         Float latitude = bundle.getFloat("latitude");
@@ -44,7 +45,7 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
         LatLng dhBK = new LatLng(latitude, longitude);
         MarkerOptions option = new MarkerOptions();
         option.position(dhBK);
-        option.title(address).snippet("Play at here");
+        option.title(address).snippet("We will get together here !");
         option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         option.alpha(0.8f);
         option.rotation(90);

@@ -36,14 +36,14 @@ import java.util.Random;
 /**
  * Created by user on 12/31/15.
  */
-public class SetupAMatchFragment extends Fragment{
+public class SetupAMatchFragment extends Fragment {
 
     View myView;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private TextView txtstartTimeCreate,txtendTimeCreate,tvErrorDateTime;
+    private TextView txtstartTimeCreate, txtendTimeCreate, tvErrorDateTime;
     private Spinner spinner;
-    private EditText txtMaximumPlayer,txtPrice;
-    private Button btnSelectStart,btnSelectEnd,btnCreateMatch;
+    private EditText txtMaximumPlayer, txtPrice;
+    private Button btnSelectStart, btnSelectEnd, btnCreateMatch;
     private List<Field> fieldList = null;
     private String idFieldString = "Field Name";
     private int idField;
@@ -56,21 +56,21 @@ public class SetupAMatchFragment extends Fragment{
         txtMaximumPlayer = (EditText) myView.findViewById(R.id.txtMaximumPlayerCreate);
         txtPrice = (EditText) myView.findViewById(R.id.txtPriceCreate);
         tvErrorDateTime = (TextView) myView.findViewById(R.id.tvErrorDateTime);
-        txtstartTimeCreate= (TextView)myView.findViewById(R.id.txtstartTimeCreate);
-        txtendTimeCreate = (TextView)myView.findViewById(R.id.txtendTimeCreate);
+        txtstartTimeCreate = (TextView) myView.findViewById(R.id.txtstartTimeCreate);
+        txtendTimeCreate = (TextView) myView.findViewById(R.id.txtendTimeCreate);
         btnSelectStart = (Button) myView.findViewById(R.id.btnSelectStart);
         btnSelectEnd = (Button) myView.findViewById(R.id.btnSelectEnd);
         btnCreateMatch = (Button) myView.findViewById(R.id.btnCreateMatch);
         // Spinner Drop down elements
         fieldList = new FieldService(getActivity().getApplicationContext()).getAllFields();
         List<String> list = new ArrayList<String>();
-        if(fieldList!=null){
-            for(Field field : fieldList){
+        if (fieldList != null) {
+            for (Field field : fieldList) {
                 list.add(field.getName());
             }
         }
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((MainActivity)getActivity(), android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((MainActivity) getActivity(), android.R.layout.simple_spinner_item, list);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -172,50 +172,51 @@ public class SetupAMatchFragment extends Fragment{
         btnCreateMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
-                    int id_user = ((MainActivity)getActivity()).user_id;
+                if (validate()) {
+                    int id_user = ((MainActivity) getActivity()).user_id;
                     Timestamp current = DateUtils.convertToTimestamp(new Date());
                     Random random = new Random();
                     int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
-                    new MatchService(getActivity().getApplicationContext()).addMatch(new Match(idField,id_user,1,Integer.parseInt(txtMaximumPlayer.getText().toString()),Integer.parseInt(txtPrice.getText().toString()), DateUtils.convertToTimestamp(txtstartTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),DateUtils.convertToTimestamp(txtendTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),false,String.valueOf(verificationCode),current,null,null));
-                    Toast.makeText(getActivity().getApplicationContext(), "Tạo trận đấu thành công", Toast.LENGTH_LONG).show();
+                    new MatchService(getActivity().getApplicationContext()).addMatch(new Match(idField, id_user, 1, Integer.parseInt(txtMaximumPlayer.getText().toString()), Integer.parseInt(txtPrice.getText().toString()), DateUtils.convertToTimestamp(txtstartTimeCreate.getText().toString(), DateUtils.FOR_SCREEN), DateUtils.convertToTimestamp(txtendTimeCreate.getText().toString(), DateUtils.FOR_SCREEN), false, String.valueOf(verificationCode), current, null, null));
+                    Toast.makeText(getActivity().getApplicationContext(), "Created a match successfully !", Toast.LENGTH_LONG).show();
                     ((MainActivity) getActivity()).chooise = R.id.nav_mymatches_layout;
-                    ((MainActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
-                    ((MainActivity)getActivity()).actionBar.setTitle("My matches");
-                    ((MainActivity)getActivity()).menu.findItem(R.id.action_search).setVisible(true);
+                    ((MainActivity) getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
+                    ((MainActivity) getActivity()).actionBar.setTitle("My matches");
+                    ((MainActivity) getActivity()).menu.findItem(R.id.action_search).setVisible(true);
                 }
             }
         });
         return myView;
     }
-    public boolean validate(){
+
+    public boolean validate() {
         boolean valid = true;
         String maxPlayer = txtMaximumPlayer.getText().toString();
         String price = txtPrice.getText().toString();
         String startTime = txtstartTimeCreate.getText().toString();
         String endTime = txtendTimeCreate.getText().toString();
         if (maxPlayer.isEmpty()) {
-            txtMaximumPlayer.setError("Enter somthing here!");
+            txtMaximumPlayer.setError("Enter something here!");
             valid = false;
-        }else{
+        } else {
             txtMaximumPlayer.setError(null);
         }
         if (price.isEmpty()) {
-            txtPrice.setError("Enter somthing here!");
+            txtPrice.setError("Enter something here!");
             valid = false;
-        }else{
+        } else {
             txtPrice.setError(null);
         }
-        if(startTime.length()<=10||endTime.length()<=10){
-            tvErrorDateTime.setText("Select both date and time");
+        if (startTime.length() <= 10 || endTime.length() <= 10) {
+            tvErrorDateTime.setText("Select both date and time !");
             valid = false;
-        }else if(DateUtils.convertToTimestamp(startTime,DateUtils.FOR_SCREEN).after(DateUtils.convertToTimestamp(endTime,DateUtils.FOR_SCREEN))
-                ||DateUtils.convertToTimestamp(startTime,DateUtils.FOR_SCREEN).before(DateUtils.convertToTimestamp(new Date()))) {
-                tvErrorDateTime.setText("Datetime incorrect");
-                valid = false;
-            }else {
-                tvErrorDateTime.setText("");
-            }
+        } else if (DateUtils.convertToTimestamp(startTime, DateUtils.FOR_SCREEN).after(DateUtils.convertToTimestamp(endTime, DateUtils.FOR_SCREEN))
+                || DateUtils.convertToTimestamp(startTime, DateUtils.FOR_SCREEN).before(DateUtils.convertToTimestamp(new Date()))) {
+            tvErrorDateTime.setText("Datetime is incorrect !");
+            valid = false;
+        } else {
+            tvErrorDateTime.setText("");
+        }
         return valid;
     }
 }
