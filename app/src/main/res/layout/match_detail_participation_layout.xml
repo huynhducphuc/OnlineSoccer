@@ -55,11 +55,11 @@
             />
         <TextView
             android:layout_gravity="center"
-            android:textColor="@color/color_black"
             android:layout_weight="6"
             android:layout_width="0dp"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
             android:id="@+id/tv_detail_district"
             android:text="10 Phan Châu Trinh 1234567891212"/>
         <ImageButton
@@ -90,13 +90,13 @@
             android:text="Host User"
             />
         <TextView
-            android:textColor="@color/color_black"
             android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
             android:id="@+id/tv_detail_hostuser"
+            android:textColor="@color/color_black"
             android:text="Admin"/>
     </LinearLayout>
     <LinearLayout
@@ -112,18 +112,18 @@
         <TextView
             android:paddingLeft="10dp"
             android:textSize="@dimen/textSize_detail"
+            android:textColor="@color/color_black"
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_gravity="center"
-            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:text="MaxPlayers"
             />
         <TextView
             android:layout_weight="5"
-            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_gravity="center"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
             android:id="@+id/tv_detail_maxplayers"
@@ -171,18 +171,18 @@
             android:background="@drawable/start"/>
         <TextView
             android:paddingLeft="10dp"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:layout_weight="3"
             android:layout_width="0dp"
-            android:textColor="@color/color_black"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="Start Time"
             />
         <TextView
             android:layout_weight="5"
-            android:textColor="@color/color_black"
             android:layout_gravity="center"
+            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
@@ -201,10 +201,10 @@
             android:background="@drawable/end"/>
         <TextView
             android:paddingLeft="10dp"
-            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:layout_weight="3"
             android:layout_gravity="center"
+            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="End Time"
@@ -213,9 +213,9 @@
             android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_gravity="center"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:id="@+id/tv_detail_endtime"
-            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:text="12/23/2015 13:12:00"/>
     </LinearLayout>
@@ -232,10 +232,10 @@
         <TextView
             android:paddingLeft="10dp"
             android:textSize="@dimen/textSize_detail"
-            android:textColor="@color/color_black"
             android:layout_weight="3"
             android:layout_gravity="center"
             android:layout_width="0dp"
+            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:text="Created"
             />
@@ -249,34 +249,12 @@
             android:id="@+id/tv_detail_created"
             android:text="12/22/2015 9:09:00"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/paddingbetweenline">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/people_join"/>
-        <EditText
-            android:paddingLeft="10dp"
-            android:textSize="@dimen/textSize_detail"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:inputType="number"
-            android:id="@+id/txt_detail_number"
-            android:layout_height="wrap_content"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Join"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:id="@+id/btnJoinMatch"
-            android:background="@color/color_main"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+        android:text="Exit"
+        android:id="@+id/btnCancel_detail_participation"
+        android:background="@color/color_main"
+        android:textColor="#fff"
+        android:layout_gravity="center"/>
 </LinearLayout>

@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_matcheslist_layout"
             android:icon="@drawable/matcheslist"
             android:title="Matches list" />
         <item
-            android:id="@+id/nav_yourmatches_layout"
+            android:id="@+id/nav_mymatches_layout"
             android:icon="@drawable/yourmatches"
-            android:title="Your matches" />
+            android:title="My matches" />
+        <item
+            android:id="@+id/nav_myparticipation_layout"
+            android:icon="@drawable/yourmatches"
+            android:title="My Participation" />
         <item
             android:id="@+id/nav_creatematch_layout"
             android:icon="@drawable/create"

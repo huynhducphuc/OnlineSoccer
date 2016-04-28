@@ -13,38 +13,32 @@ import android.widget.TextView;
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.activities.MatchDetailActivity;
-import com.example.ooosu.quanlysanbong.activities.MatchDetailActivityOfMe;
-import com.example.ooosu.quanlysanbong.model.bean.Field;
-import com.example.ooosu.quanlysanbong.model.bean.Match;
-import com.example.ooosu.quanlysanbong.service.FieldService;
-import com.example.ooosu.quanlysanbong.service.SlotService;
-import com.example.ooosu.quanlysanbong.utils.DateUtils;
+import com.example.ooosu.quanlysanbong.activities.MatchDetailOfMeActivity;
+import com.example.ooosu.quanlysanbong.activities.MatchDetailParticipationActivity;
+import com.example.ooosu.quanlysanbong.model.bean.ViewMatch;
+import com.example.ooosu.quanlysanbong.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by oOosu on 4/26/2016.
  */
-public class MatchAdapter extends ArrayAdapter<Match> {
+public class MatchAdapter extends ArrayAdapter<ViewMatch> {
     private Activity mContext = null;
     private int idLayout;
-    private String fieldName = "Field Name";
-    List<Match> matchesList = null;
-    List<Field> fieldList = null;
-    private SlotService slotService = null;
-    private List<Long> seatsList = null;
+    List<ViewMatch> viewMatchList = null;
+    List<ViewMatch> viewMatchList2 = null;
 
-    public MatchAdapter(Activity mContext, int idLayout, List<Match> matchesList) {
-        super(mContext, idLayout, matchesList);
+    public MatchAdapter(Activity mContext, int idLayout, List<ViewMatch> viewMatchList) {
+        super(mContext, idLayout, viewMatchList);
         this.mContext = mContext;
         this.idLayout = idLayout;
-        this.matchesList = matchesList;
-        this.fieldList = new FieldService(mContext).getAllFields();
-        this.slotService = new SlotService(mContext);
-        seatsList = new ArrayList<Long>();
-        for(Match match : matchesList){
-            seatsList.add(match.getMaxPlayers()-slotService.countSlots(match.getId())-1);
+        this.viewMatchList = viewMatchList;
+        viewMatchList2 = new ArrayList<ViewMatch>();
+        for(ViewMatch viewMatch: viewMatchList){
+            viewMatchList2.add(viewMatch);
         }
     }
     public MatchAdapter(Context context,int resource){
@@ -77,32 +71,52 @@ public class MatchAdapter extends ArrayAdapter<Match> {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                Match matches = matchesList.get(position);
-                bundle.putInt("match_id", matches.getId());
+                ViewMatch viewMatch = viewMatchList.get(position);
+                bundle.putInt("match_id", viewMatch.getId());
+                bundle.putInt("user_id", SessionManager.getSessionManager(mContext).getUser().getId());
                 int chooise = ((MainActivity) mContext).chooise;
-                if(chooise==R.id.nav_matcheslist_layout||chooise==-1) {
+                if (chooise == R.id.nav_matcheslist_layout || chooise == -1) {
                     Intent intent1 = new Intent(mContext, MatchDetailActivity.class);
                     intent1.putExtras(bundle);
                     mContext.startActivityForResult(intent1, 100);
-                }else if(chooise==R.id.nav_yourmatches_layout) {
-                    Intent intent2 = new Intent(mContext, MatchDetailActivityOfMe.class);
+                } else if (chooise == R.id.nav_mymatches_layout) {
+                    Intent intent2 = new Intent(mContext, MatchDetailOfMeActivity.class);
                     intent2.putExtras(bundle);
                     mContext.startActivityForResult(intent2, 110);
+                } else if (chooise == R.id.nav_myparticipation_layout) {
+                    Intent intent2 = new Intent(mContext, MatchDetailParticipationActivity.class);
+                    intent2.putExtras(bundle);
+                    mContext.startActivityForResult(intent2, 120);
                 }
             }
         });
 
-        Match match = matchesList.get(position);
-        if(fieldList!=null){
-            for(Field field : fieldList)
-                if(field.getId()==match.getFieldId())
-                    fieldName = field.getName();
-        }
-        viewHolder.txtFieldName.setText(fieldName);
-        viewHolder.txtStartTime.setText(DateUtils.formatDatetime(match.getStartTime(),DateUtils.FOR_SCREEN));
-        viewHolder.txtPrice.setText(match.getPrice()+" VND");
-        viewHolder.txtSeats.setText(seatsList.get(position)+"");
+        ViewMatch viewMatch = viewMatchList.get(position);
+
+        viewHolder.txtFieldName.setText(viewMatch.getFieldName());
+        viewHolder.txtStartTime.setText(viewMatch.getStartTime());
+        viewHolder.txtPrice.setText(viewMatch.getPrice()+" VND");
+        viewHolder.txtSeats.setText(viewMatch.getSeats()+"");
         notifyDataSetChanged();
         return view;
+    }
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        viewMatchList.clear();
+        if (charText.length() == 0) {
+            viewMatchList.addAll(viewMatchList2);
+        }
+        else
+        {
+            for (ViewMatch vm : viewMatchList2)
+            {
+                if (vm.getFieldName().toLowerCase(Locale.getDefault()).contains(charText)||vm.getStartTime().toLowerCase(Locale.getDefault()).contains(charText)||
+                        String.valueOf(vm.getPrice()).contains(charText)||String.valueOf(vm.getSeats()).contains(charText))
+                {
+                    viewMatchList.add(vm);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

@@ -17,14 +17,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ooosu.quanlysanbong.adapter.MatchAdapter;
 import com.example.ooosu.quanlysanbong.fragments.ChangePasswordFragment;
 import com.example.ooosu.quanlysanbong.fragments.MatchesListFragment;
 import com.example.ooosu.quanlysanbong.R;
+import com.example.ooosu.quanlysanbong.fragments.MyParticipationFragment;
 import com.example.ooosu.quanlysanbong.fragments.SetupAMatchFragment;
 import com.example.ooosu.quanlysanbong.fragments.ProfileInformationFragment;
-import com.example.ooosu.quanlysanbong.fragments.YourMatchesFragment;
+import com.example.ooosu.quanlysanbong.fragments.MyMatchesFragment;
+import com.example.ooosu.quanlysanbong.service.UserService;
+import com.example.ooosu.quanlysanbong.utils.SessionManager;
 
 /**
  * Created by oOosu on 4/21/2016.
@@ -35,17 +40,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Menu menu;
     private ActionBar actionBar;
     public int chooise=-1;
+    public MatchAdapter matchAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-//        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-//        List<User> list = databaseHelper.getAllUser();
-//        String txt = "";
-//        for (User user : list){
-//            txt += user.toString()+"\n";
-//        }
+
         Bundle bundle = getIntent().getExtras();
         user_id = bundle.getInt("user_id");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -63,10 +64,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        TextView textView = (TextView) findViewById(R.id.tvNameUser);
+//        String userName = new UserService(this).getUser(SessionManager.getSessionManager(this).getUser().getId()).getUsername();
+//        textView.setText(userName);
+
         fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
-
-
     }
     @Override
     public void onBackPressed() {
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //adapter.filter(newText);
+                if(matchAdapter!=null) matchAdapter.filter(newText);
                 return false;
             }
         });
@@ -128,10 +131,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             actionBar.setTitle("Matches List");
             menu.findItem(R.id.action_search).setVisible(true);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
-        } else if (id == R.id.nav_yourmatches_layout) {
-            actionBar.setTitle("Your matches");
+        } else if (id == R.id.nav_mymatches_layout) {
+            actionBar.setTitle("My matches");
             menu.findItem(R.id.action_search).setVisible(true);
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
+        } else if (id == R.id.nav_myparticipation_layout) {
+            actionBar.setTitle("My Participation");
+            menu.findItem(R.id.action_search).setVisible(true);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new MyParticipationFragment()).commit();
         }else if (id == R.id.nav_creatematch_layout) {
             actionBar.setTitle("Setup A Match");
             menu.findItem(R.id.action_search).setVisible(false);
@@ -145,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             menu.findItem(R.id.action_search).setVisible(false);
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ChangePasswordFragment()).commit();
         }else if (id == R.id.nav_logout_layout) {
+            SessionManager.getSessionManager(this).clear();
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
             finish();
@@ -173,9 +181,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Bundle bundle = data.getExtras();
                 int chooise2 = bundle.getInt("chooise2");
                 if (chooise2 == 2) {
-                    actionBar.setTitle("Your matches");
+                    actionBar.setTitle("My matches");
                     menu.findItem(R.id.action_search).setVisible(true);
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
+                }
+            }
+        }else if(requestCode==120){
+            if(resultCode==121){
+                Bundle bundle = data.getExtras();
+                int chooise2 = bundle.getInt("chooise2");
+                if (chooise2 == 3) {
+                    actionBar.setTitle("My Participation");
+                    menu.findItem(R.id.action_search).setVisible(true);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new MyParticipationFragment()).commit();
                 }
             }
         }

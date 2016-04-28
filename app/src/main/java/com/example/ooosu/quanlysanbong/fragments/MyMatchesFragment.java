@@ -3,17 +3,10 @@ package com.example.ooosu.quanlysanbong.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
@@ -32,9 +25,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by user on 12/31/15.
+ * Created by oOosu on 4/26/2016.
  */
-public class MatchesListFragment extends Fragment{
+public class MyMatchesFragment extends Fragment {
     View myView;
     int id,price;
     String fieldName,startTime;
@@ -43,11 +36,11 @@ public class MatchesListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.matches_list_layout, container, false);
-        //lay du lieu
+
         List<ViewMatch> viewMatchList = new ArrayList<ViewMatch>();
         // lay id match
         MatchService matchService = new MatchService(getActivity().getApplicationContext());
-        List<Match> matchesList = matchService.getAvailableMatches();
+        List<Match> matchesList = matchService.getAllMatches(((MainActivity) getActivity()).user_id);
         // lay field name
         List<Field> fieldList = new FieldService(getActivity().getApplicationContext()).getAllFields();
         //lay slot
@@ -74,5 +67,4 @@ public class MatchesListFragment extends Fragment{
         ((MainActivity)getActivity()).matchAdapter = matchAdapter;
         return myView;
     }
-
 }

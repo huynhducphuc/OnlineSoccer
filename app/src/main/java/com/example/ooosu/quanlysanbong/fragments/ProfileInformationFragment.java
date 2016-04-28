@@ -3,6 +3,7 @@ package com.example.ooosu.quanlysanbong.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +121,28 @@ public class ProfileInformationFragment extends Fragment{
     }
     public boolean validate(){
         boolean valid = true;
+        String username = txt_profile_username.getText().toString();
+        String phone = txt_profile_phonenumber.getText().toString();
+        String email = txt_profile_email.getText().toString();
+
+        if (username.isEmpty() || username.length() < 4 || username.length() > 16) {
+            txt_profile_username.setError("Between 4 and 16 alphanumeric characters");
+            valid = false;
+        } else {
+            txt_profile_username.setError(null);
+        }
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            txt_profile_email.setError("Enter a valid email address");
+            valid = false;
+        } else {
+            txt_profile_email.setError(null);
+        }
+        if (phone.isEmpty() || !Patterns.PHONE.matcher(phone).matches()) {
+            txt_profile_phonenumber.setError("Enter a valid phone number");
+            valid = false;
+        }else{
+            txt_profile_phonenumber.setError(null);
+        }
         return valid;
     }
 }

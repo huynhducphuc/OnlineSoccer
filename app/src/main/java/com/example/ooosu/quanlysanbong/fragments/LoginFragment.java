@@ -21,6 +21,7 @@ import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.dbhelper.DatabaseHelper;
 import com.example.ooosu.quanlysanbong.model.bean.User;
 import com.example.ooosu.quanlysanbong.service.UserService;
+import com.example.ooosu.quanlysanbong.utils.SessionManager;
 
 public class LoginFragment extends Fragment {
 
@@ -53,8 +54,11 @@ public class LoginFragment extends Fragment {
                 if(validate()){
                     UserService userService = new UserService(getActivity().getApplicationContext());
                     account = userService.getUser(txtUsername.getText().toString(), txtPassword.getText().toString());
-                    if (account!=null)
+                    if (account!=null){
+                        SessionManager sessionManager = SessionManager.getSessionManager(getActivity().getApplicationContext());
+                        sessionManager.storeUser(account);
                         onLoginSuccess();
+                    }
                     else onLoginFailed();
                 }
             }

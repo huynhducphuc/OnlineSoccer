@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -163,7 +161,7 @@ public class SetupAMatchFragment extends Fragment{
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                txtendTimeCreate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                txtendTimeCreate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -180,9 +178,9 @@ public class SetupAMatchFragment extends Fragment{
                     Random random = new Random();
                     int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
                     new MatchService(getActivity().getApplicationContext()).addMatch(new Match(idField,id_user,1,Integer.parseInt(txtMaximumPlayer.getText().toString()),Integer.parseInt(txtPrice.getText().toString()), DateUtils.convertToTimestamp(txtstartTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),DateUtils.convertToTimestamp(txtendTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),false,String.valueOf(verificationCode),current,null,null));
+                    Toast.makeText(getActivity().getApplicationContext(), "Tạo trận đấu thành công", Toast.LENGTH_LONG).show();
+                    ((MainActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
                 }
-                Toast.makeText(getActivity().getApplicationContext(), "Tạo trận đấu thành công", Toast.LENGTH_LONG).show();
-                ((MainActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();
             }
         });
         return myView;
@@ -208,9 +206,13 @@ public class SetupAMatchFragment extends Fragment{
         if(startTime.length()<=10||endTime.length()<=10){
             tvErrorDateTime.setText("Select both date and time");
             valid = false;
-        }else{
-            tvErrorDateTime.setText("");
-        }
+        }else if(DateUtils.convertToTimestamp(startTime,DateUtils.FOR_SCREEN).after(DateUtils.convertToTimestamp(endTime,DateUtils.FOR_SCREEN))
+                ||DateUtils.convertToTimestamp(startTime,DateUtils.FOR_SCREEN).before(DateUtils.convertToTimestamp(new Date()))) {
+                tvErrorDateTime.setText("Datetime incorrect");
+                valid = false;
+            }else {
+                tvErrorDateTime.setText("");
+            }
         return valid;
     }
 }

@@ -34,7 +34,10 @@
         <activity android:name=".activities.MatchDetailActivity"
             android:parentActivityName=".activities.MainActivity"
             android:noHistory="true"/>
-        <activity android:name=".activities.MatchDetailActivityOfMe"
+        <activity android:name=".activities.MatchDetailOfMeActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:noHistory="true"/>
+        <activity android:name=".activities.MatchDetailParticipationActivity"
             android:parentActivityName=".activities.MainActivity"
             android:noHistory="true"/>
         <activity android:name=".activities.GoogleMapActivity" />

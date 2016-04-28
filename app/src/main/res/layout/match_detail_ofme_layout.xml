@@ -18,12 +18,14 @@
             android:textSize="@dimen/textSize_detail"
             android:layout_weight="3"
             android:layout_width="0dp"
+            android:textColor="@color/color_black"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="Field Name"
             />
         <TextView
             android:id="@+id/tv_detail_fieldname"
+            android:textColor="@color/color_black"
             android:layout_weight="5"
             android:layout_width="0dp"
             android:textSize="@dimen/textSize_detail"
@@ -47,11 +49,13 @@
             android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:text="Address"
             />
         <TextView
             android:layout_gravity="center"
+            android:textColor="@color/color_black"
             android:layout_weight="6"
             android:layout_width="0dp"
             android:textSize="@dimen/textSize_detail"
@@ -83,10 +87,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Host User"
+            android:textColor="@color/color_black"
             />
         <TextView
             android:layout_weight="5"
             android:layout_width="0dp"
+            android:textColor="@color/color_black"
             android:layout_gravity="center"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
@@ -111,9 +117,11 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="MaxPlayers"
+            android:textColor="@color/color_black"
             />
         <TextView
             android:layout_weight="5"
+            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:textSize="@dimen/textSize_detail"
@@ -133,6 +141,7 @@
             android:background="@drawable/price"/>
         <TextView
             android:paddingLeft="10dp"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:layout_weight="3"
             android:layout_gravity="center"
@@ -146,6 +155,7 @@
             android:layout_gravity="center"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
             android:id="@+id/tv_detail_price"
             android:text="100000"/>
     </LinearLayout>
@@ -165,6 +175,7 @@
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_gravity="center"
+            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:text="Start Time"
             />
@@ -173,6 +184,7 @@
             android:layout_gravity="center"
             android:layout_width="0dp"
             android:textSize="@dimen/textSize_detail"
+            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:id="@+id/tv_detail_starttime"
             android:text="12/23/2015 12:12:00"/>
@@ -193,11 +205,13 @@
             android:layout_weight="3"
             android:layout_gravity="center"
             android:layout_width="0dp"
+            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:text="End Time"
             />
         <TextView
             android:layout_weight="5"
+            android:textColor="@color/color_black"
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:textSize="@dimen/textSize_detail"
@@ -221,12 +235,14 @@
             android:layout_weight="3"
             android:layout_gravity="center"
             android:layout_width="0dp"
+            android:textColor="@color/color_black"
             android:layout_height="wrap_content"
             android:text="Created"
             />
         <TextView
             android:layout_weight="5"
             android:layout_width="0dp"
+            android:textColor="@color/color_black"
             android:textSize="@dimen/textSize_detail"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -237,7 +253,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/btnCancel_detail"
+        android:id="@+id/btnCancel_detail_ofme"
         android:background="@color/color_main"
+        android:textColor="#fff"
         android:layout_gravity="center"/>
 </LinearLayout>
