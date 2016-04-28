@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this,MainActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         }
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);

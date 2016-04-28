@@ -179,7 +179,10 @@ public class SetupAMatchFragment extends Fragment{
                     int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
                     new MatchService(getActivity().getApplicationContext()).addMatch(new Match(idField,id_user,1,Integer.parseInt(txtMaximumPlayer.getText().toString()),Integer.parseInt(txtPrice.getText().toString()), DateUtils.convertToTimestamp(txtstartTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),DateUtils.convertToTimestamp(txtendTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),false,String.valueOf(verificationCode),current,null,null));
                     Toast.makeText(getActivity().getApplicationContext(), "Tạo trận đấu thành công", Toast.LENGTH_LONG).show();
+                    ((MainActivity) getActivity()).chooise = R.id.nav_mymatches_layout;
                     ((MainActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
+                    ((MainActivity)getActivity()).actionBar.setTitle("My matches");
+                    ((MainActivity)getActivity()).menu.findItem(R.id.action_search).setVisible(true);
                 }
             }
         });

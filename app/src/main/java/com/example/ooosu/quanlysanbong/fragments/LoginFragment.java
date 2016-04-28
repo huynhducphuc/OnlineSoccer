@@ -114,7 +114,7 @@ public class LoginFragment extends Fragment {
         Toast.makeText(getContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
         Bundle bundle = new Bundle();
         int user_id = account.getId();
-        bundle.putInt("user_id",user_id);
+        bundle.putInt("user_id", user_id);
         Intent intent = new Intent(getContext(),MainActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);

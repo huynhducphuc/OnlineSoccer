@@ -124,14 +124,14 @@ public class MatchDetailActivity extends AppCompatActivity {
                     error="This is your match!Can not register!";
                     showDialog(error).create().show();
                 }else if(slotService.getSlot(match.getId(),user_id)!=null){
-                    error="You already register!";
+                    error="You already registered!";
                     showDialog(error).create().show();
                 }
                 else if(validate()){
                     Long slotexits = (Long) (match.getMaxPlayers()-slotService.countSlots(match.getId())-1);
                     int quantity = Integer.parseInt(txt_detail_number.getText().toString());
                     if(quantity>slotexits){
-                        error="Not enough space";
+                        error="Not enough slot";
                         showDialog(error).create().show();
                     }
                     else {
@@ -139,6 +139,11 @@ public class MatchDetailActivity extends AppCompatActivity {
                         int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
                         slotService.addSlot(new Slot(match.getId(),user_id,quantity,false,String.valueOf(verificationCode),DateUtils.convertToTimestamp(new Date()),null,null));
                         Toast.makeText(getApplicationContext(),"Đăng ký thành công",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putInt("user_id",user_id);
+                        intent.putExtras(bundle2);
+                        startActivity(intent);
                     }
                 }
             }
@@ -148,7 +153,7 @@ public class MatchDetailActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MatchDetailActivity.this);
         builder.setTitle("Message");
         builder.setMessage(message);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setIcon(R.drawable.alert);
         builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

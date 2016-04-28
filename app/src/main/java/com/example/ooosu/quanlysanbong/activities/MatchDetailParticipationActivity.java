@@ -27,6 +27,7 @@ import com.example.ooosu.quanlysanbong.service.SlotService;
 import com.example.ooosu.quanlysanbong.service.UserService;
 import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -109,6 +110,9 @@ public class MatchDetailParticipationActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+        if(match.getStartTime().before(DateUtils.convertToTimestamp(new Date()))){
+            btnCancel_detail_participation.setVisibility(View.INVISIBLE);
+        }
         btnCancel_detail_participation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

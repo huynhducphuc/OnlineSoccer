@@ -37,10 +37,11 @@ import com.example.ooosu.quanlysanbong.utils.SessionManager;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     public FragmentManager fragmentManager;
     public Integer user_id = null ;
-    private Menu menu;
-    private ActionBar actionBar;
+    public Menu menu;
+    public ActionBar actionBar;
     public int chooise=-1;
     public MatchAdapter matchAdapter = null;
+    private String fragment_layout = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Bundle bundle = getIntent().getExtras();
         user_id = bundle.getInt("user_id");
+        if(bundle.getString("mymatch")!=null)
+            fragment_layout = bundle.getString("mymatch");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -64,12 +68,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        TextView textView = (TextView) findViewById(R.id.tvNameUser);
-//        String userName = new UserService(this).getUser(SessionManager.getSessionManager(this).getUser().getId()).getUsername();
-//        textView.setText(userName);
-
         fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
+        if(fragment_layout!=null&&fragment_layout.equals("mymatch")){
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new MyMatchesFragment()).commit();
+            actionBar.setTitle("My matches");
+        }else {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
+        }
     }
     @Override
     public void onBackPressed() {
@@ -107,10 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         switch (item.getItemId()) {
             case R.id.exit:
                 finish();

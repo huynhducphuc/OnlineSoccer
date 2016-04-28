@@ -1,6 +1,7 @@
 package com.example.ooosu.quanlysanbong.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Patterns;
@@ -112,7 +113,6 @@ public class ProfileInformationFragment extends Fragment{
                     user.setUpdatedDate(DateUtils.convertToTimestamp(new Date()));
                     new UserService(getActivity().getApplicationContext()).updateUser(user);
                     Toast.makeText(getActivity().getApplicationContext(), "Cập nhật thành công", Toast.LENGTH_LONG).show();
-                    ((MainActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
                 }
             }
         });

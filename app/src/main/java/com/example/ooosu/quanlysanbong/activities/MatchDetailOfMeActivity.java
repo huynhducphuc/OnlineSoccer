@@ -28,6 +28,7 @@ import com.example.ooosu.quanlysanbong.service.SlotService;
 import com.example.ooosu.quanlysanbong.service.UserService;
 import com.example.ooosu.quanlysanbong.utils.DateUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -114,9 +115,13 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        if(match.getStartTime().before(DateUtils.convertToTimestamp(new Date()))){
+            btnCancel_detail_ofme.setVisibility(View.INVISIBLE);
+        }
         btnCancel_detail_ofme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final AlertDialog.Builder builder = new AlertDialog.Builder(MatchDetailOfMeActivity.this);
                 builder.setTitle("Message");
                 builder.setMessage("Do you want to cancel this match?");
@@ -131,6 +136,7 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         Bundle bundle2 = new Bundle();
                         bundle2.putInt("user_id",user_id);
+                        bundle2.putString("mymatch","mymatch");
                         intent.putExtras(bundle2);
                         startActivity(intent);
                     }
