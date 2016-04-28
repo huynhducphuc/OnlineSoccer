@@ -185,7 +185,7 @@ public class MatchService {
                         MatchTable.CREATED.getValue(),
                         MatchTable.UPDATED.getValue(),
                         MatchTable.DELETED.getValue()},
-                MatchTable.START_TIME + ">datetime('now')",
+                MatchTable.START_TIME + ">datetime('now', '+7 hour')",
                 null, null, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
