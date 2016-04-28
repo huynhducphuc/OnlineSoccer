@@ -132,6 +132,17 @@ public class SlotService {
         }
     }
 
+    public long deleteSlot(int matchId) {
+        if (matchId <= 0) {
+            return -1;
+        } else {
+            db = databaseHelper.getWritableDatabase();
+            return db.delete(SlotTable.TABLE_NAME.getValue(),
+                    SlotTable.MATCH_ID.getValue() + "=?",
+                    new String[]{String.valueOf(matchId)});
+        }
+    }
+
     public long countSlots(int matchId) {
         if (matchId <= 0) {
             return 0;
