@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.activities.MainActivity;
 import com.example.ooosu.quanlysanbong.activities.MatchDetailActivity;
+import com.example.ooosu.quanlysanbong.activities.MatchDetailActivityOfMe;
 import com.example.ooosu.quanlysanbong.model.bean.Field;
 import com.example.ooosu.quanlysanbong.model.bean.Match;
 import com.example.ooosu.quanlysanbong.service.FieldService;
@@ -78,10 +79,16 @@ public class MatchAdapter extends ArrayAdapter<Match> {
                 Bundle bundle = new Bundle();
                 Match matches = matchesList.get(position);
                 bundle.putInt("match_id", matches.getId());
-                bundle.putInt("chooise", ((MainActivity) mContext).chooise);
-                Intent intent = new Intent(mContext, MatchDetailActivity.class);
-                intent.putExtras(bundle);
-                mContext.startActivityForResult(intent, 100);
+                int chooise = ((MainActivity) mContext).chooise;
+                if(chooise==R.id.nav_matcheslist_layout||chooise==-1) {
+                    Intent intent1 = new Intent(mContext, MatchDetailActivity.class);
+                    intent1.putExtras(bundle);
+                    mContext.startActivityForResult(intent1, 100);
+                }else if(chooise==R.id.nav_yourmatches_layout) {
+                    Intent intent2 = new Intent(mContext, MatchDetailActivityOfMe.class);
+                    intent2.putExtras(bundle);
+                    mContext.startActivityForResult(intent2, 110);
+                }
             }
         });
 

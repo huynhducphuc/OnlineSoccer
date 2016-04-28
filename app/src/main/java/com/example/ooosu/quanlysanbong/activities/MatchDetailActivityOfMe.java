@@ -1,6 +1,5 @@
 package com.example.ooosu.quanlysanbong.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ooosu.quanlysanbong.R;
 import com.example.ooosu.quanlysanbong.model.bean.Field;
@@ -26,9 +24,9 @@ import com.example.ooosu.quanlysanbong.utils.DateUtils;
 import java.util.List;
 
 /**
- * Created by oOosu on 4/26/2016.
+ * Created by oOosu on 4/28/2016.
  */
-public class MatchDetailActivity extends AppCompatActivity {
+public class MatchDetailActivityOfMe extends AppCompatActivity {
     ImageButton imgGoToMapAndroid;
     private TextView tv_detail_fieldname,tv_detail_district,tv_detail_hostuser,tv_detail_maxplayers,tv_detail_price,tv_detail_starttime,tv_detail_endtime,tv_detail_created;
     private EditText txt_detail_number;
@@ -40,7 +38,7 @@ public class MatchDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.match_detail_layout);
+        setContentView(R.layout.match_detail_ofme_layout);
         //set actionbar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -65,7 +63,7 @@ public class MatchDetailActivity extends AppCompatActivity {
         int match_id = bundle.getInt("match_id");
         //Lay du lieu cho form
         Match match = new MatchService(this).getMatch(match_id);
-        Log.d("detail", ""+match.toString());
+        Log.d("detail", "" + match.toString());
         List<Field> fieldList = new FieldService(this).getAllFields();
         if(fieldList!=null) {
             for (Field field : fieldList) {
@@ -107,9 +105,9 @@ public class MatchDetailActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 Bundle bundleSend = new Bundle();
-                bundleSend.putInt("chooise2",1);
+                bundleSend.putInt("chooise2",2);
                 getIntent().putExtras(bundleSend);
-                setResult(101, getIntent());
+                setResult(111, getIntent());
                 finish();
                 return true;
         }

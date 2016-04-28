@@ -31,7 +31,7 @@ public class LoginFragment extends Fragment {
     public LoginFragment(){
         setRetainInstance(true);
     }
-
+    private User account = null;
 
 
     @Nullable
@@ -50,13 +50,13 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if(validate()){
-//                    String storedPassword = databaseHelper.getSinlgeEntry(txtUsername.getText().toString());
-//                    String password = txtPassword.getText().toString();
-//                    if (password.equals(storedPassword))
+                if(validate()){
+                    UserService userService = new UserService(getActivity().getApplicationContext());
+                    account = userService.getUser(txtUsername.getText().toString(), txtPassword.getText().toString());
+                    if (account!=null)
                         onLoginSuccess();
-//                    else onLoginFailed();
-                //}
+                    else onLoginFailed();
+                }
             }
         });
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -102,14 +102,14 @@ public class LoginFragment extends Fragment {
         return valid;
     }
     public void onLoginFailed() {
-        Toast.makeText(getContext(), "Đăng nhập thấ bại", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Đăng nhập thất bại", Toast.LENGTH_LONG).show();
 
         btnLogin.setEnabled(true);
     }
     public void onLoginSuccess() {
         Toast.makeText(getContext(), "Đăng nhập thành công", Toast.LENGTH_LONG).show();
         Bundle bundle = new Bundle();
-        int user_id = 1;
+        int user_id = account.getId();
         bundle.putInt("user_id",user_id);
         Intent intent = new Intent(getContext(),MainActivity.class);
         intent.putExtras(bundle);

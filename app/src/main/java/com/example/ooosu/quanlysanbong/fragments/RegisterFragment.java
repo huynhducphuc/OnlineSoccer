@@ -74,7 +74,7 @@ public class RegisterFragment extends Fragment {
                 list.add(district.getName());
             }
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item,list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>((LoginActivity)getActivity(),android.R.layout.simple_spinner_item,list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAddress.setAdapter(dataAdapter);
 
@@ -107,7 +107,7 @@ public class RegisterFragment extends Fragment {
                     new UserService(getActivity().getApplicationContext()).addUser(user);
 
                     ((LoginActivity) getActivity()).changeViewPagePosition(0);
-                    Toast.makeText(getActivity().getApplicationContext(),"Đăng ký thành công",Toast.LENGTH_LONG);
+                    Toast.makeText(getActivity().getApplicationContext(),"Đăng ký thành công",Toast.LENGTH_LONG).show();
                 }
             }
         });

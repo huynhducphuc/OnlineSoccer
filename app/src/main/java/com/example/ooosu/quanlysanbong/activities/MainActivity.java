@@ -30,10 +30,12 @@ import com.example.ooosu.quanlysanbong.fragments.YourMatchesFragment;
  * Created by oOosu on 4/21/2016.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private FragmentManager fragmentManager;
+    public FragmentManager fragmentManager;
+    public Integer user_id = null ;
     private Menu menu;
     private ActionBar actionBar;
     public int chooise=-1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        for (User user : list){
 //            txt += user.toString()+"\n";
 //        }
-
+        Bundle bundle = getIntent().getExtras();
+        user_id = bundle.getInt("user_id");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -156,14 +159,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==100){
-            if(resultCode==101){
+            if(resultCode==101) {
                 Bundle bundle = data.getExtras();
                 int chooise2 = bundle.getInt("chooise2");
-                if (chooise2 == R.id.nav_matcheslist_layout) {
+                if (chooise2 == 1) {
                     actionBar.setTitle("Matches List");
                     menu.findItem(R.id.action_search).setVisible(true);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MatchesListFragment()).commit();
-                }else if (chooise2 == R.id.nav_yourmatches_layout) {
+                }
+            }
+        }else if(requestCode==110){
+            if(resultCode==111){
+                Bundle bundle = data.getExtras();
+                int chooise2 = bundle.getInt("chooise2");
+                if (chooise2 == 2) {
                     actionBar.setTitle("Your matches");
                     menu.findItem(R.id.action_search).setVisible(true);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();

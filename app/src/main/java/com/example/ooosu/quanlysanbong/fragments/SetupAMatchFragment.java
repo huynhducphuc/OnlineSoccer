@@ -45,7 +45,6 @@ public class SetupAMatchFragment extends Fragment{
     private TextView txtstartTimeCreate,txtendTimeCreate,tvErrorDateTime;
     private Spinner spinner;
     private EditText txtMaximumPlayer,txtPrice;
-    private String dateTimeStart = "",dateTimeEnd="";
     private Button btnSelectStart,btnSelectEnd,btnCreateMatch;
     private List<Field> fieldList = null;
     private String idFieldString = "Field Name";
@@ -152,7 +151,7 @@ public class SetupAMatchFragment extends Fragment{
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
-                                txtendTimeCreate.setText(txtendTimeCreate.getText().toString() + " " + hourOfDay + ":" + minute);
+                                txtendTimeCreate.setText(txtendTimeCreate.getText().toString() + " " + hourOfDay + ":" + minute + ":00");
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
@@ -176,13 +175,14 @@ public class SetupAMatchFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 if(validate()){
-                    int id_user = 1;
+                    int id_user = ((MainActivity)getActivity()).user_id;
                     Timestamp current = DateUtils.convertToTimestamp(new Date());
                     Random random = new Random();
                     int verificationCode = random.nextInt(999999 - 000000 + 1) + 000000;
                     new MatchService(getActivity().getApplicationContext()).addMatch(new Match(idField,id_user,1,Integer.parseInt(txtMaximumPlayer.getText().toString()),Integer.parseInt(txtPrice.getText().toString()), DateUtils.convertToTimestamp(txtstartTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),DateUtils.convertToTimestamp(txtendTimeCreate.getText().toString(),DateUtils.FOR_SCREEN),false,String.valueOf(verificationCode),current,null,null));
                 }
-                Toast.makeText(getActivity().getApplicationContext(), "Tạo trận đấu thành công", Toast.LENGTH_LONG);
+                Toast.makeText(getActivity().getApplicationContext(), "Tạo trận đấu thành công", Toast.LENGTH_LONG).show();
+                ((MainActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.content_frame, new YourMatchesFragment()).commit();
             }
         });
         return myView;

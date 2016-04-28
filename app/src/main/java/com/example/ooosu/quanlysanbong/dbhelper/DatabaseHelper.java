@@ -62,7 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("insert into districts(district_name, city_id) values('Hải Châu' ,1);");
 
         // field
-        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Nguyễn Chánh', 1, 'Hoà Khánh Bắc Liên Chiểu Đà Nẵng', 16.084969, 16.084969, '098 1198132', datetime('now'), null, null);");
+        db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Nguyễn Chánh', 1, 'Hoà Khánh Bắc Liên Chiểu Đà Nẵng', 16.085001, 108.151137, '098 1198132', datetime('now'), null, null);");
         db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng Chuyên Việt', 7, '98 Tiểu La, Quận Hải Châu', 16.050577, 108.209351, '05113638555', datetime('now'), null, null);");
         db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng MU', 1, '59 Ngô Thì Nhậm, Hòa Khánh Nam, Liên Chiểu', 16.071593, 108.155218, '05113388987', datetime('now'), null, null);");
         db.execSQL("insert into fields(field_name, district_id, address, latitude, longitude, phone_number, created, updated, deleted) values ('Sân bóng Tân Hưng yên', 1, '878 Tôn Đức Thắng – Liên Chiểu', 16.069858, 108.151479, '05113388987', datetime('now'), null, null);");

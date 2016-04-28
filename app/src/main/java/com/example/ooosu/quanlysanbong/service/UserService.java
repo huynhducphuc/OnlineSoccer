@@ -125,7 +125,7 @@ public class UserService {
         cv.put(UserTable.STATUS.getValue(), user.getStatus());
         cv.put(UserTable.DISTRICT_ID.getValue(), user.getDistrictId());
         cv.put(UserTable.USER_TYPE.getValue(), user.getUserType());
-        cv.put(UserTable.LAST_LOGIN.getValue(), user.getLastLogin().toString());
+        cv.put(UserTable.LAST_LOGIN.getValue(), DateUtils.formatDatetime(user.getLastLogin(), DateUtils.FOR_DATABASE));
         cv.put(UserTable.VERIFIED.getValue(), user.isVerified());
         cv.put(UserTable.VERIFICATION_CODE.getValue(), user.getVerificationCode());
         cv.put(UserTable.CREATED.getValue(), DateUtils.formatDatetime(user.getCreatedDate(), DateUtils.FOR_DATABASE));
@@ -148,12 +148,12 @@ public class UserService {
             cv.put(UserTable.STATUS.getValue(), user.getStatus());
             cv.put(UserTable.DISTRICT_ID.getValue(), user.getDistrictId());
             cv.put(UserTable.USER_TYPE.getValue(), user.getUserType());
-            cv.put(UserTable.LAST_LOGIN.getValue(), user.getLastLogin().toString());
+            cv.put(UserTable.LAST_LOGIN.getValue(), DateUtils.formatDatetime(user.getLastLogin(), DateUtils.FOR_DATABASE));
             cv.put(UserTable.VERIFIED.getValue(), user.isVerified());
             cv.put(UserTable.VERIFICATION_CODE.getValue(), user.getVerificationCode());
-            cv.put(UserTable.CREATED.getValue(), user.getCreatedDate().toString());
-            cv.put(UserTable.UPDATED.getValue(), user.getUpdatedDate().toString());
-            cv.put(UserTable.DELETED.getValue(), user.getDeletedDate().toString());
+            cv.put(UserTable.CREATED.getValue(), DateUtils.formatDatetime(user.getCreatedDate(), DateUtils.FOR_DATABASE));
+            cv.put(UserTable.UPDATED.getValue(), DateUtils.formatDatetime(user.getUpdatedDate(), DateUtils.FOR_DATABASE));
+            cv.put(UserTable.DELETED.getValue(), DateUtils.formatDatetime(user.getDeletedDate(), DateUtils.FOR_DATABASE));
 
             return db.update(UserTable.TABLE_NAME.getValue(), cv, UserTable.USER_ID + "=?", new String[]{String.valueOf(user.getId())});
         }

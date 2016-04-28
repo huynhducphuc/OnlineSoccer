@@ -37,10 +37,14 @@ public class GoogleMapActivity extends FragmentActivity implements OnMapReadyCal
 //        LatLng sydney = new LatLng(16.073760, 108.149914);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Đại học Bách Khoa - ĐHDN"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        LatLng dhBK = new LatLng(16.073760, 108.149914);
+        Bundle bundle = getIntent().getExtras();
+        Float latitude = bundle.getFloat("latitude");
+        Float longitude = bundle.getFloat("longitude");
+        String address = bundle.getString("address");
+        LatLng dhBK = new LatLng(latitude, longitude);
         MarkerOptions option = new MarkerOptions();
         option.position(dhBK);
-        option.title("Đại học Bách Khoa - ĐHDN").snippet("This is cool");
+        option.title(address).snippet("Play at here");
         option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         option.alpha(0.8f);
         option.rotation(90);

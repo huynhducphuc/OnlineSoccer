@@ -34,6 +34,9 @@
         <activity android:name=".activities.MatchDetailActivity"
             android:parentActivityName=".activities.MainActivity"
             android:noHistory="true"/>
+        <activity android:name=".activities.MatchDetailActivityOfMe"
+            android:parentActivityName=".activities.MainActivity"
+            android:noHistory="true"/>
         <activity android:name=".activities.GoogleMapActivity" />
         <activity android:name=".activities.ForgotPasswordActivity"
             android:parentActivityName=".activities.LoginActivity"
