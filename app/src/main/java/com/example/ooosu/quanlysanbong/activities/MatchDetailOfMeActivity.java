@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +49,7 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
     private float latitude,longitude;
     private MatchService matchService;
     private Match match;
-    private String address;
+    private String address,fieldName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,8 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
             for (Field field : fieldList) {
                 Log.d("detail2", ""+field.toString());
                 if (field.getId() == match.getFieldId()) {
-                    tv_detail_fieldname.setText(field.getName());
+                    fieldName = field.getName();
+                    tv_detail_fieldname.setText(fieldName);
                     address = field.getAddress();
                     tv_detail_district.setText(address);
                     latitude = field.getLatitude();
@@ -165,5 +171,23 @@ public class MatchDetailOfMeActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detail, menu);
+
+        //share
+        //  Set up ShareActionProvider's default share intent
+        MenuItem shareItem = menu.findItem(R.id.action_share_1);
+        ShareActionProvider myShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        Intent myIntent = new Intent();
+        myIntent.setAction(Intent.ACTION_SEND);
+        myIntent.putExtra(Intent.EXTRA_TEXT,
+                fieldName+"\n"+tv_detail_starttime.getText().toString());
+        myIntent.setType("text/plain");
+        myShareActionProvider.setShareIntent(myIntent);
+
+        return true;
     }
 }
